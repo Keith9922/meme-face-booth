@@ -1,5 +1,14 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+
+  "framework": null,
+  "outputDirectory": ".",
+
+  "//": "models/ 和 vendor/ 共 51MB，不进 Git（见 .gitignore）。GitHub 触发的部署
+         如果不在构建时拉回来，线上就是个没有模型的空壳。setup.sh 幂等，本地已有则跳过。",
+  "installCommand": "true",
+  "buildCommand": "bash setup.sh",
+
   "headers": [
     {
       "source": "/vendor/(.*)",
