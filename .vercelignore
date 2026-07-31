@@ -11,3 +11,8 @@ node_modules
 # 线上版让访问者自己传图（只存本机 localStorage）。
 memes/*
 !memes/manifest.json
+
+# 队友招募墙是仓库里另一个独立的 Vercel 项目（root directory = teamup）。
+# 这个项目是整个仓库根目录的静态部署，不排掉的话它的源码会被原样托管出去 ——
+# 包括 teamup/src/data/wall.json 里那 95 个选手的微信号和手机号。
+teamup
