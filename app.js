@@ -184,7 +184,14 @@ async function loadLib(say){
     say(`读表情包 ${++i}/${mf.memes.length}`);
     const m = { id:e.file, name:e.name, code:e.code, src:'./memes/' + e.file, face:null, pose:null };
     const hit = cache[e.file];
-    if (hit){ m.face = hit.face; m.pose = hit.pose; }
+    /* 清单里带向量就直接用 —— 素材管理台上传时已经算好了，启动不用重算。
+       但图仍要确认存在：清单会进 Git 而图片不会，新 clone 和线上版都可能
+       只有向量没有图，那样右半屏就是个破图。 */
+    if (e.face || e.pose){
+      if (!await loadImg(m.src)){ console.warn(`[跳过] ${e.file}：清单里有向量但图片不在`); continue; }
+      m.face = e.face || null; m.pose = e.pose || null;
+    }
+    else if (hit){ m.face = hit.face; m.pose = hit.pose; }
     else {
       const img = await loadImg(m.src);
       if (img){
