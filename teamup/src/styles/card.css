@@ -1,0 +1,534 @@
+/* ==========================================================================
+   一张「别在草地上的纸条」
+   外层 .pin 负责歪斜和悬浮；.flip 负责 3D 翻面；两个 .face 里各放一个组件库的 Card。
+   ========================================================================== */
+
+.pin {
+  --rot: 0deg; /* 每张卡固定的歪斜角，由 record id 哈希得来，重新构建也不会跳 */
+  --lift: 0px; /* 纵向错位，让整排卡片不像标尺一样齐 */
+  --card-h: 344px;
+
+  position: relative;
+  margin-top: var(--lift);
+  perspective: 1400px;
+  list-style: none;
+
+  /* 一面墙近百张卡、七千个节点。视口外的卡片直接跳过渲染，
+     高度是固定的所以 contain-intrinsic-size 给得准，滚动条不会跳。 */
+  content-visibility: auto;
+  contain-intrinsic-size: auto var(--card-h);
+
+  /* 入场：从下方浮起并落定到自己的角度 */
+  animation: pin-in 0.62s cubic-bezier(0.22, 1.15, 0.36, 1) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+@keyframes pin-in {
+  from {
+    opacity: 0;
+    transform: translateY(26px) rotate(0deg) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(var(--rot)) scale(1);
+  }
+}
+
+.pin__inner {
+  position: relative;
+  height: var(--card-h);
+  transform-style: preserve-3d;
+  transition: transform 0.62s cubic-bezier(0.34, 1.32, 0.5, 1);
+  cursor: pointer;
+  border-radius: 22px;
+}
+
+.pin[data-flipped='true'] .pin__inner {
+  transform: rotateY(180deg);
+}
+
+/* 悬停时纸条被「拎起来」并摆正，像要拿下来看 */
+.pin:hover,
+.pin:focus-within {
+  z-index: 5;
+}
+.pin:hover .pin__inner,
+.pin:focus-within .pin__inner {
+  transform: translateY(-8px) rotateY(0deg) scale(1.022);
+}
+.pin[data-flipped='true']:hover .pin__inner,
+.pin[data-flipped='true']:focus-within .pin__inner {
+  transform: translateY(-8px) rotateY(180deg) scale(1.022);
+}
+
+/* 落在草地上的影子。
+   本来用 filter: blur() 做柔边，98 份模糊层把合成器压垮了 ——
+   换成径向渐变，视觉一样、成本几乎为零。 */
+.pin::after {
+  content: '';
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: -18px;
+  height: 26px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(28, 62, 30, 0.34) 0%, rgba(28, 62, 30, 0) 72%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: -1;
+}
+.pin:hover::after,
+.pin:focus-within::after {
+  opacity: 0.85;
+  transform: scale(1.08);
+}
+
+/* --- 两个面 --- */
+
+.face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.face--back {
+  transform: rotateY(180deg);
+}
+
+/* 背面朝里时不接受点击/焦点 */
+.pin[data-flipped='false'] .face--back,
+.pin[data-flipped='true'] .face--front {
+  pointer-events: none;
+}
+
+/* 覆盖组件库 Card 的默认布局，让它撑满整个面并变成竖向 flex 容器 */
+.face > div {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 20px 16px;
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.3s ease;
+  overflow: hidden;
+}
+.pin:hover .face > div,
+.pin:focus-within .face > div {
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* --------------------------------------------------------------------------
+   别针（一片叶子）
+   -------------------------------------------------------------------------- */
+
+.leaf {
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  translate: -50% 0;
+  z-index: 3;
+  width: 34px;
+  height: 34px;
+  transform-origin: 50% 12%;
+  rotate: -6deg;
+  transition: rotate 0.25s ease;
+  pointer-events: none;
+}
+
+/* 只有被摸到的那片叶子才晃。
+   98 片叶子一起无限循环时，合成器一直在满负荷跑，页面会卡到没法滚。 */
+.pin:hover .leaf,
+.pin:focus-within .leaf {
+  animation: leaf-sway 1.6s ease-in-out infinite;
+}
+
+@keyframes leaf-sway {
+  0%,
+  100% {
+    rotate: -7deg;
+  }
+  50% {
+    rotate: 7deg;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   正面
+   -------------------------------------------------------------------------- */
+
+.card__top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  flex: none;
+}
+
+.card__no {
+  font-family: Nunito, sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: #7d6444;
+  background: rgba(125, 100, 68, 0.13);
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+
+.card__kind {
+  margin-left: auto;
+  font-size: 11.5px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 999px;
+  color: #fff;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+.card__kind[data-kind='project'] {
+  background: #e59266;
+}
+.card__kind[data-kind='seeker'] {
+  background: #56b9c9;
+}
+
+.card__title {
+  margin: 0 0 8px;
+  font-size: clamp(19px, 2vw, 21px);
+  line-height: 1.32;
+  font-weight: 900;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  flex: none;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+/* 名字特别长的（最长 55 字）自动降一档，避免两行也塞不下 */
+.card__title[data-long='true'] {
+  font-size: 16.5px;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+}
+
+.card__rule {
+  flex: none;
+  height: 3px;
+  width: 46px;
+  border-radius: 3px;
+  background: currentColor;
+  opacity: 0.28;
+  margin-bottom: 10px;
+}
+
+.card__intro {
+  flex: 1 1 auto;
+  min-height: 0;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.72;
+  font-weight: 500;
+  color: #6b5a44;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+/* 内容越短字越大，并且在剩余空间里居中 ——
+   一句「ai心理解梦产品」用 14px 顶在纸条上方，下面空掉大半张卡，看着像没加载完；
+   放大居中之后，它读起来就是一句认真写下的标语。
+   （短文案不需要截断，所以这两档换成 flex 居中，不再用 -webkit-box 夹行。） */
+.card__intro[data-density='xs'],
+.card__intro[data-density='sm'] {
+  display: flex;
+  align-items: center;
+}
+.card__intro[data-density='xs'] {
+  font-size: 18.5px;
+  line-height: 1.85;
+  font-weight: 600;
+}
+.card__intro[data-density='sm'] {
+  font-size: 15.5px;
+  line-height: 1.82;
+}
+
+/* 长文案被卡片高度截断时，line-clamp 的省略号常常也一起被裁掉，
+   于是句子像被刀切一样断在半路。加一层渐隐，让「还有下文」这件事看起来是有意的。
+   文案短的时候渐隐区落在空白上，没有副作用。 */
+.card__intro[data-density='md'] {
+  -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 26px), transparent 100%);
+  mask-image: linear-gradient(180deg, #000 calc(100% - 26px), transparent 100%);
+}
+
+.card__intro--muted {
+  color: #7d6444;
+}
+
+/* 没填招募方向 / 能力时的兜底文案，不留空槽 */
+.card__foot-empty {
+  font-size: 13px;
+  font-weight: 600;
+  color: #7d6444;
+  opacity: 0.9;
+}
+
+.card__foot {
+  flex: none;
+  margin-top: 12px;
+  padding-top: 11px;
+  border-top: 2px dashed rgba(143, 115, 79, 0.3);
+}
+
+.card__foot-label {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  margin-bottom: 7px;
+}
+
+.taglist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  overflow: hidden;
+  max-height: 58px;
+  /* 右下角的「翻面」提示是绝对定位的，给它留出位置，别让标签压上去 */
+  padding-right: 62px;
+}
+
+.card__flip-hint {
+  position: absolute;
+  right: 14px;
+  bottom: 11px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #7d6444;
+  opacity: 0.85;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.pin:hover .card__flip-hint {
+  opacity: 1;
+  transform: translateX(-2px);
+}
+.card__flip-hint svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* --------------------------------------------------------------------------
+   背面
+   -------------------------------------------------------------------------- */
+
+.back__head {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.back__avatar {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 19px;
+  background: #ffe6a8;
+  border: 2.5px solid #e8c877;
+  box-shadow: 0 2px 0 rgba(61, 52, 40, 0.14);
+}
+
+.back__who {
+  min-width: 0;
+}
+
+.back__role {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+}
+
+.back__name {
+  display: block;
+  font-size: 17px;
+  font-weight: 900;
+  color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.contact {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 10px 9px 12px;
+  margin-bottom: 12px;
+  border-radius: 14px;
+  background: rgba(25, 200, 185, 0.13);
+  border: 2px solid rgba(25, 200, 185, 0.4);
+}
+
+.contact__icon {
+  flex: none;
+  font-size: 14px;
+}
+
+.contact__value {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 800;
+  color: #17756e;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  user-select: all;
+}
+
+.contact__value--empty {
+  font-weight: 600;
+  color: #8a9a98;
+}
+
+.contact__copy {
+  flex: none;
+  border: 0;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: #fff;
+  background: #19c8b9;
+  box-shadow: 0 2.5px 0 #12a094;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.contact__copy:active {
+  transform: translateY(2px);
+  box-shadow: 0 0.5px 0 #12a094;
+}
+.contact__copy[data-copied='true'] {
+  background: #7cbf5c;
+  box-shadow: 0 2.5px 0 #5f9a44;
+}
+
+/* 背面可滚动区：信息条数不定，长的让它自己滚 */
+.back__scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(143, 115, 79, 0.4) transparent;
+}
+.back__scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.back__scroll::-webkit-scrollbar-thumb {
+  background: rgba(143, 115, 79, 0.35);
+  border-radius: 999px;
+}
+
+.field {
+  margin-bottom: 10px;
+}
+
+.field__label {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  color: var(--ink-soft);
+  margin-bottom: 5px;
+}
+
+.field__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.field__text {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.72;
+  font-weight: 500;
+  color: #6b5a44;
+  word-break: break-word;
+}
+
+.back__meta {
+  flex: none;
+  margin-top: 8px;
+  padding-top: 9px;
+  border-top: 2px dashed rgba(143, 115, 79, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #7d6444;
+}
+
+.back__meta-flip {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.back__meta-flip svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* --------------------------------------------------------------------------
+   窄屏：不歪了，也别浮太高，老老实实一列
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .pin {
+    --rot: 0deg !important;
+    --lift: 0px !important;
+    /* 单列时卡片宽了、每行装得下更多字，高度可以收一点 */
+    --card-h: 318px;
+  }
+  .card__title {
+    font-size: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pin {
+    animation: none;
+    transform: rotate(var(--rot));
+  }
+  .leaf {
+    animation: none;
+  }
+  /* 翻面本身是功能不是装饰，保留但改成瞬时切换 */
+  .pin__inner {
+    transition: none;
+  }
+}
