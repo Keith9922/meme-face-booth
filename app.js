@@ -36,7 +36,7 @@ const P = {
   blank: 1.0,                 // 摆烂闸门：脸离"面无表情"太近 → 表情分打折
   lazy:  1.0,                 // 躺平闸门：身体离"自然站姿"太近 → 动作分打折
   stick: .88,                 // 换图迟滞：新候选要比当前近这么多倍才准换
-  thr: 70,                    // 触发阈值 %
+  thr: 80,                    // 触发阈值 %
   hold: 7,                    // 去抖：同一张连续命中帧数
   alpha: .4,                  // 特征平滑
   cd: 3,                      // 倒计时秒
@@ -118,9 +118,10 @@ const toScore = (d, d0, d1) => 100 * clamp((d1 - d) / (d1 - d0), 0, 1);
 
 /* ── 4. 表情包库 ─────────────────────────────────────────── */
 
-const CACHE_KEY = 'mimicLib_v5';
-let cache = {};
+const CACHE_KEY = 'mimicLib_v5', MINE_KEY = 'mimicMine_v5';
+let cache = {}, mine = [];
 try { cache = JSON.parse(localStorage[CACHE_KEY] || '{}'); } catch {}
+try { mine  = JSON.parse(localStorage[MINE_KEY]  || '[]'); } catch {}
 let LIB = [], libReady = false;
 
 /* ── 5. 匹配 ─────────────────────────────────────────────── */
@@ -197,7 +198,61 @@ async function loadLib(say){
     else console.warn(`[跳过] ${e.file}：提取不到人脸也提取不到姿势`);
   }
   try { localStorage[CACHE_KEY] = JSON.stringify(cache); } catch {}
+  for (const c of mine) out.push({ ...c, mine:true });
   return out;
+}
+
+/* ── 自带表情包 ──────────────────────────────────────────── */
+/* 线上版不带素材（版权），谁用谁传自己的图，只存在本机 localStorage。 */
+
+async function addFiles(files){
+  const imgs = [...files].filter(f => f.type.startsWith('image/'));
+  if (!imgs.length || !stillF) return;
+  let ok = 0, bad = 0, dup = 0, i = 0;
+  const tip = t => { $('#dropTip').textContent = t; };
+
+  for (const f of imgs){
+    tip(`处理中 ${++i}/${imgs.length}…`);
+    await new Promise(r => setTimeout(r));
+    const url = URL.createObjectURL(f);
+    const img = await loadImg(url);
+    URL.revokeObjectURL(url);
+    if (!img){ bad++; continue; }
+
+    const face = faceVec(stillF.detect(img));
+    const pv   = poseVecs(stillP.detect(img));
+    const pose = pv ? pv[0] : null;
+    if (!face && !pose){ bad++; continue; }
+
+    /* 查重：跟库里任何一张太近就挡掉，否则匹配会来回打架 */
+    if (face && LIB.some(m => m.face && faceDist(face, m.face) < .07)){ dup++; continue; }
+
+    const s = Math.min(1, 720 / img.width);
+    const cv = document.createElement('canvas');
+    cv.width = Math.round(img.width * s); cv.height = Math.round(img.height * s);
+    cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
+    const rec = { id:'mine_' + Date.now() + '_' + ok, code:'MINE',
+                  name:f.name.replace(/\.[^.]+$/, '').slice(0, 8) || `表情${LIB.length+1}`,
+                  src:cv.toDataURL('image/jpeg', .82), face, pose };
+    mine.push(rec); LIB.push({ ...rec, mine:true });
+    ok++;
+  }
+  try { localStorage[MINE_KEY] = JSON.stringify(mine); }
+  catch { tip('浏览器存不下了，删掉一些再传'); return; }
+
+  const parts = [`加了 ${ok} 张`];
+  if (bad) parts.push(`${bad} 张提取不到人脸和姿势`);
+  if (dup) parts.push(`${dup} 张跟已有的太像`);
+  tip(parts.join(' · '));
+  refreshLibUI();
+}
+
+function refreshLibUI(){
+  const n = LIB.length, has = n > 0;
+  $('#libCount').textContent = has ? `${n} 张表情包已就位` : '还没有表情包';
+  $('#go').disabled = !has;
+  $('#go').textContent = has ? '开始' : '先加几张表情包';
+  $('#mineWrap').hidden = false;
 }
 
 async function boot(){
@@ -240,13 +295,19 @@ async function boot(){
 
     LIB = await loadLib(say);
     libReady = true;
-    if (!LIB.length) throw new Error('表情包库是空的。把图片放进 memes/ 并在 manifest.json 登记。');
     renderDev();
+    say('');
 
-    $('#veil').hidden = true;
-    running = true;
-    setState('track');
-    requestAnimationFrame(loop);
+    /* 库是空的不算错误 —— 线上版本来就不带素材，让人现场传自己的图 */
+    if (!LIB.length){
+      $('#veilBody').innerHTML =
+        '这个版本不自带表情包素材。<br>把你自己的表情包图片拖进来，或点下面选文件。<br>' +
+        '<b style="color:var(--ink-3);font-weight:400">图片只存在你本机浏览器里，不会上传。</b>';
+      refreshLibUI();
+      return;
+    }
+    refreshLibUI();
+    start();
   } catch (e){
     const v = $('#veil');
     v.hidden = false; v.classList.add('err');
@@ -258,6 +319,14 @@ async function boot(){
       '<br><br><code>getUserMedia</code> 只在 https 或 localhost 下可用。';
     btn.textContent = '重试'; btn.disabled = false; say('');
   }
+}
+
+function start(){
+  if (!LIB.length || running) return;
+  $('#veil').hidden = true;
+  running = true;
+  setState('track');
+  requestAnimationFrame(loop);
 }
 
 /* ── 7. 状态机 ───────────────────────────────────────────── */
@@ -546,7 +615,23 @@ function paintRank(r){
 
 /* ── 14. 事件 ────────────────────────────────────────────── */
 
-$('#go').addEventListener('click', boot);
+$('#go').addEventListener('click', () => (libReady ? start() : boot()));
+$('#pick').addEventListener('change', e => { addFiles([...e.target.files]); e.target.value = ''; });
+$('#clearMine').addEventListener('click', () => {
+  if (!mine.length) return;
+  if (!confirm(`删掉你加的 ${mine.length} 张表情包？`)) return;
+  mine = []; localStorage.removeItem(MINE_KEY);
+  LIB = LIB.filter(m => !m.mine); refreshLibUI();
+});
+['dragenter','dragover'].forEach(ev => document.addEventListener(ev, e => {
+  e.preventDefault(); if (libReady) document.body.classList.add('drop');
+}));
+['dragleave','drop'].forEach(ev => document.addEventListener(ev, e => {
+  e.preventDefault();
+  if (ev === 'dragleave' && e.relatedTarget) return;
+  document.body.classList.remove('drop');
+  if (ev === 'drop' && libReady) addFiles([...e.dataTransfer.files]);
+}));
 $('#again').addEventListener('click', reset);
 $('#save').addEventListener('click', () => $('#out').toBlob(b => {
   const a = document.createElement('a');

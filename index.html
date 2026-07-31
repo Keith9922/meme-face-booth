@@ -97,6 +97,16 @@ video{background:#0d0c0a}
 .veil .big:disabled{opacity:.5}
 #goTip{margin-top:12px;font-family:var(--mono);font-size:12px;color:var(--ink-3);min-height:1.4em}
 .veil.err h2{color:var(--rec)}
+#mineWrap{margin-top:26px;padding-top:22px;border-top:1px solid var(--line)}
+#libCount{font-size:13px;color:var(--ink-2);margin-bottom:11px}
+.mine-acts{display:flex;gap:8px;justify-content:center}
+.mine-acts .btn{flex:0 0 auto;padding:9px 18px;font-size:13px}
+label.btn{cursor:pointer}
+#dropTip{margin-top:10px;font-size:12px;color:var(--acc);min-height:1.4em}
+body.drop::before{
+  content:"松手加入表情包";position:fixed;inset:0;z-index:60;display:grid;place-items:center;
+  background:rgba(13,12,10,.9);color:var(--acc);font-size:22px;pointer-events:none;
+}
 
 /* ── 结果 ── */
 .shot{position:fixed;inset:0;z-index:30;display:grid;place-items:center;
@@ -186,6 +196,16 @@ body.dev #stage{padding-right:306px}
       全部在本机运行，断网可用，不上传任何数据。</p>
     <button class="big" id="go">开始</button>
     <div id="goTip"></div>
+
+    <div id="mineWrap" hidden>
+      <div id="libCount"></div>
+      <div class="mine-acts">
+        <label class="btn dim" for="pick">＋ 拖图进来 / 选文件</label>
+        <input id="pick" type="file" accept="image/*" multiple hidden>
+        <button class="btn dim" id="clearMine">清空我加的</button>
+      </div>
+      <div id="dropTip"></div>
+    </div>
   </div>
 </div>
 

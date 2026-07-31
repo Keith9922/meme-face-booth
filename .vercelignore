@@ -1,0 +1,13 @@
+# 默认 Vercel CLI 会沿用 .gitignore —— 这个文件一存在就完全取代它。
+# 所以 models/ 和 vendor/ 会被上传（运行时必需），而 memes/ 里的图不会。
+
+.git
+.claude
+node_modules
+.DS_Store
+*.log
+
+# 表情包素材不部署：仓库里那批是有版权的网络 meme，公开 URL 上等于公开分发。
+# 线上版让访问者自己传图（只存本机 localStorage）。
+memes/*
+!memes/manifest.json

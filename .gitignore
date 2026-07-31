@@ -11,3 +11,4 @@ memes/*
 .DS_Store
 node_modules/
 *.log
+.vercel
