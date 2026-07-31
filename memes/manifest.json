@@ -1,0 +1,17 @@
+{
+  "_note": "演示素材，来自公开 GitHub 仓库的示例图，仅供本地原型验证。正式活动请换成你自己有授权的表情包。",
+  "memes": [
+    { "file": "shock-guy-meme.jpg",             "name": "震惊",     "code": "M-01" },
+    { "file": "lebron-scream.jpg",              "name": "咆哮",     "code": "M-02" },
+    { "file": "angry_baby.jpg",                 "name": "龇牙",     "code": "M-03" },
+    { "file": "gene_wilder.jpg",                "name": "眯眼坏笑", "code": "M-04" },
+    { "file": "overly_attached_girlfriend.jpg", "name": "咧嘴大笑", "code": "M-05" },
+    { "file": "smirk-meme.jpg",                 "name": "得意笑",   "code": "M-06" },
+    { "file": "leonardo_dicaprio.jpg",          "name": "举杯笑",   "code": "M-07" },
+    { "file": "success_kid.jpg",                "name": "抿嘴握拳", "code": "M-08" },
+    { "file": "disaster_girl.jpg",              "name": "斜眼微笑", "code": "M-09" },
+    { "file": "speed-homeless.jpg",             "name": "闭眼皱脸", "code": "M-10" },
+    { "file": "shaq-t.jpg",                     "name": "垂眼皱眉", "code": "M-11" },
+    { "file": "monkey-wink.jpg",                "name": "挤眼",     "code": "M-12" }
+  ]
+}
