@@ -15,7 +15,26 @@ const MEMES = join(ROOT, 'memes');
 const MANIFEST = join(MEMES, 'manifest.json');
 const PORT = Number(process.env.PORT) || 5173;
 const HOST = process.env.HOST || '127.0.0.1';
-const ALLOW_WRITE = HOST === '127.0.0.1' || HOST === 'localhost' || process.env.ALLOW_WRITE === '1';
+const TOKEN = process.env.ADMIN_TOKEN || '';
+const LOCAL_ONLY = HOST === '127.0.0.1' || HOST === 'localhost';
+
+/* 写接口的开放条件，按危险程度从松到紧：
+     只监听本机            → 直接开（外面进不来）
+     设了 ADMIN_TOKEN      → 开，但每次写都要带上 token
+     既非本机又没 token    → 关。放公网上的无鉴权写接口 = 谁都能上传和删除。 */
+const ALLOW_WRITE = LOCAL_ONLY || !!TOKEN;
+const needToken = () => !LOCAL_ONLY && !!TOKEN;
+
+/* 定长比较，避免用比较耗时反推 token */
+function tokenOk(req){
+  if (!needToken()) return true;
+  const h = req.headers['authorization'] || '';
+  const got = h.startsWith('Bearer ') ? h.slice(7) : (req.headers['x-admin-token'] || '');
+  if (got.length !== TOKEN.length) return false;
+  let diff = 0;
+  for (let i = 0; i < TOKEN.length; i++) diff |= got.charCodeAt(i) ^ TOKEN.charCodeAt(i);
+  return diff === 0;
+}
 
 const MIME = {
   '.html':'text/html; charset=utf-8', '.js':'text/javascript; charset=utf-8',
@@ -54,8 +73,12 @@ const safeName = s => (s || '').replace(/[^\w一-龥-]/g, '').slice(0, 40);
 /* ── API ─────────────────────────────────────────────────── */
 
 async function api(req, res, path){
-  if (req.method !== 'GET' && !ALLOW_WRITE)
-    return json(res, 403, { error:'写接口已关闭。仅在 127.0.0.1 上开放，或设 ALLOW_WRITE=1。' });
+  if (req.method !== 'GET'){
+    if (!ALLOW_WRITE)
+      return json(res, 403, { error:'写接口已关闭：非本机监听且未设 ADMIN_TOKEN。' });
+    if (!tokenOk(req))
+      return json(res, 401, { error:'需要 ADMIN_TOKEN' });
+  }
 
   /* 列出全部 */
   if (path === '/api/memes' && req.method === 'GET'){
@@ -66,8 +89,18 @@ async function api(req, res, path){
     return json(res, 200, {
       memes: m.memes.map(e => ({ ...e, missing: !have.has(e.file) })),
       orphans: files.filter(f => f !== 'manifest.json' && !m.memes.some(e => e.file === f)),
-      writable: ALLOW_WRITE,
+      writable: ALLOW_WRITE, needToken: needToken(),
     });
+  }
+
+  /* harvest/ 里的候选图（tools/harvest.mjs 拉的 CC0 素材），供管理台筛选 */
+  if (path === '/api/harvest' && req.method === 'GET'){
+    const dir = join(ROOT, 'harvest');
+    let files = [], meta = {};
+    try { files = await readdir(dir); } catch {}
+    try { meta = JSON.parse(await readFile(join(dir, '_source.json'), 'utf8')); } catch {}
+    const imgs = files.filter(f => /\.(jpe?g|png|webp)$/i.test(f));
+    return json(res, 200, { files: imgs.map(f => ({ file:f, ...(meta[f] || {}) })) });
   }
 
   /* 新增一张：{ name, dataUrl, face, pose } —— 向量在浏览器里算好再传上来，
@@ -154,5 +187,9 @@ createServer(async (req, res) => {
 }).listen(PORT, HOST, () => {
   console.log(`  表情复刻机   http://localhost:${PORT}`);
   console.log(`  素材管理     http://localhost:${PORT}/admin.html`);
-  console.log(`  写接口       ${ALLOW_WRITE ? '开启' : '关闭（非本机监听）'}`);
+  console.log(`  监听         ${HOST}:${PORT}`);
+  console.log(`  写接口       ${!ALLOW_WRITE ? '关闭（非本机且未设 ADMIN_TOKEN）'
+                              : needToken() ? '开启 · 需要 ADMIN_TOKEN' : '开启 · 本机免鉴权'}`);
+  if (!LOCAL_ONLY && !TOKEN)
+    console.log(`  ⚠ 对外监听却没设 ADMIN_TOKEN，写接口已自动关闭。设了才能远程上传。`);
 });

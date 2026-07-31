@@ -11,6 +11,24 @@ import { FilesetResolver, FaceLandmarker, PoseLandmarker }
 
 const $ = s => document.querySelector(s);
 
+/* 远程部署时写接口要带 token。只放 sessionStorage —— 关掉标签页就没了，
+   不落 localStorage，免得留在别人用过的机器上。 */
+const tok = {
+  get: () => sessionStorage.mimicToken || '',
+  set: v => { v ? sessionStorage.mimicToken = v : delete sessionStorage.mimicToken; },
+};
+async function api(url, opt = {}){
+  const o = { ...opt, headers:{ ...(opt.headers || {}) } };
+  const t = tok.get();
+  if (t) o.headers['X-Admin-Token'] = t;
+  const r = await fetch(url, o);
+  if (r.status === 401){
+    const v = prompt('这台服务器需要管理 token：');
+    if (v){ tok.set(v); return api(url, opt); }
+  }
+  return r;
+}
+
 /* 与 app.js 保持一致：剔掉 _neutral / eyeLook*（眼球朝向）/ eyeBlink*（瞬时） */
 const DROPBS = n => n === '_neutral' || n.startsWith('eyeLook') || n.startsWith('eyeBlink');
 let KEEP = null;
@@ -118,7 +136,7 @@ async function addFiles(files){
     cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
 
     const name = f.name.replace(/\.[^.]+$/, '').slice(0, 12) || `表情${LIST.length + 1}`;
-    const r = await fetch('/api/memes', {
+    const r = await api('/api/memes', {
       method:'POST', headers:{ 'Content-Type':'application/json' },
       body: JSON.stringify({ name, dataUrl: cv.toDataURL('image/jpeg', .86), face: fv, pose: pv }),
     });
@@ -145,7 +163,7 @@ async function backfill(){
     const fv = faceVec(face.detect(img));
     const pv = poseVec(pose.detect(img));
     if (!fv && !pv){ log(`${tag} 提取不到人脸和姿势`, 'no'); no++; continue; }
-    await fetch(`/api/memes/${encodeURIComponent(m.file)}`, {
+    await api(`/api/memes/${encodeURIComponent(m.file)}`, {
       method:'PATCH', headers:{ 'Content-Type':'application/json' },
       body: JSON.stringify({ face: fv, pose: pv }),
     });
@@ -153,6 +171,71 @@ async function backfill(){
     ok++;
   }
   log(`—— 补算完成：${ok} 成功，${no} 不可用`, 'dim');
+  refresh();
+}
+
+/* ── 从 harvest 批量筛选导入 ─────────────────────────────── */
+/* 三道关：能不能提取出向量 → 表情/动作够不够夸张 → 跟已有的重不重 */
+
+const TERM_CN = {
+  'shocked face':'震惊', 'surprised face':'吃惊', 'screaming person':'尖叫',
+  'angry face':'愤怒', 'laughing out loud':'大笑', 'crying face':'哭',
+  'silly face':'鬼脸', 'funny face':'搞怪', 'grimace':'龇牙',
+  'tongue out':'吐舌', 'wink':'眨眼', 'yawning':'打哈欠',
+  'excited person':'兴奋', 'frustrated face':'抓狂', 'thinking pose':'思考',
+  'facepalm':'扶额', 'thumbs up person':'点赞', 'shrug':'摊手',
+  'pointing person':'指人', 'hands on head':'抱头',
+};
+const MIN_STRENGTH = .25;   /* 低于此值的表情会被装置的「摆烂闸门」压住，收了也没用 */
+
+async function importHarvest(){
+  if (!ready){ log('模型还在加载', 'no'); return; }
+  const r = await fetch('/api/harvest');
+  const { files } = await r.json();
+  if (!files.length){ log('harvest/ 是空的，先跑 node tools/harvest.mjs', 'no'); return; }
+
+  log(`harvest 里有 ${files.length} 张候选，开始筛…`, 'dim');
+  const NEU = KEEP ? new Array(KEEP.length).fill(0) : null;
+  const accepted = [];                       // 本轮已收，用于组内互查重
+  let noVec = 0, weak = 0, dup = 0, ok = 0, i = 0;
+
+  for (const f of files){
+    if (++i % 20 === 0) log(`…已处理 ${i}/${files.length}`, 'dim');
+    const img = await loadImg('./harvest/' + encodeURIComponent(f.file));
+    if (!img){ noVec++; continue; }
+
+    const fv = faceVec(face.detect(img));
+    const pv = poseVec(pose.detect(img));
+    if (!fv && !pv){ noVec++; continue; }
+
+    /* 表情强度：离「面无表情」多远。太淡的收了也会被闸门压住 */
+    const strength = (fv && NEU) ? faceDist(fv, NEU) : 0;
+    if (!pv && strength < MIN_STRENGTH){ weak++; continue; }
+
+    if (fv){
+      const pool = [...LIST.filter(e => e.face).map(e => e.face), ...accepted];
+      let nd = Infinity;
+      for (const v of pool) nd = Math.min(nd, faceDist(fv, v));
+      if (nd < .09){ dup++; continue; }      // 组内查重比单张严一点
+    }
+
+    const s = Math.min(1, 720 / img.width);
+    const cv = document.createElement('canvas');
+    cv.width = Math.round(img.width * s); cv.height = Math.round(img.height * s);
+    cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height);
+
+    const base = TERM_CN[f.term] || f.term || '表情';
+    const name = `${base}${accepted.filter(Boolean).length ? '' : ''}`.slice(0, 12);
+    const resp = await api('/api/memes', {
+      method:'POST', headers:{ 'Content-Type':'application/json' },
+      body: JSON.stringify({ name, dataUrl: cv.toDataURL('image/jpeg', .86), face: fv, pose: pv }),
+    });
+    if (!resp.ok){ noVec++; continue; }
+    if (fv) accepted.push(fv);
+    log(`收下「${name}」 强度 ${strength.toFixed(2)} ${[fv?'表情':null, pv?'动作':null].filter(Boolean).join('+')}`, 'ok');
+    ok++;
+  }
+  log(`—— 筛完：收下 ${ok}／候选 ${files.length}　（提不出向量 ${noVec}，表情太淡 ${weak}，重复 ${dup}）`, 'dim');
   refresh();
 }
 
@@ -229,12 +312,12 @@ $('#grid').addEventListener('click', async e => {
   const file = card.dataset.file;
   if (e.target.matches('[data-del]')){
     if (!confirm(`删掉「${card.querySelector('[data-name]').value}」？文件也会一起删。`)) return;
-    await fetch(`/api/memes/${encodeURIComponent(file)}`, { method:'DELETE' });
+    await api(`/api/memes/${encodeURIComponent(file)}`, { method:'DELETE' });
     refresh();
   }
   if (e.target.matches('[data-save]')){
     const name = card.querySelector('[data-name]').value.trim();
-    await fetch(`/api/memes/${encodeURIComponent(file)}`, {
+    await api(`/api/memes/${encodeURIComponent(file)}`, {
       method:'PATCH', headers:{ 'Content-Type':'application/json' },
       body: JSON.stringify({ name }),
     });
@@ -244,6 +327,7 @@ $('#grid').addEventListener('click', async e => {
 
 $('#pick').addEventListener('change', e => { addFiles([...e.target.files]); e.target.value = ''; });
 $('#backfill').addEventListener('click', backfill);
+$('#harvest').addEventListener('click', importHarvest);
 const drop = $('#drop');
 ['dragenter','dragover'].forEach(ev => document.addEventListener(ev, e => {
   e.preventDefault(); drop.classList.add('on');

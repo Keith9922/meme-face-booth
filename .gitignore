@@ -6,10 +6,12 @@
 # 表情包素材不进仓库：
 #   仓库里那批是从公开仓库借来做技术验证的网络 meme，有版权，不能随仓库分发。
 #   正式使用请放自己有授权的图，并在 memes/manifest.json 里登记。
-memes/*
-!memes/manifest.json
+# memes/ 现在全是 CC0 / 公有领域素材（Openverse 采集），可商用可分发，进仓库。
+# 有版权的演示图已移到 demo-memes-copyrighted/，只留本地。
 
 .DS_Store
 node_modules/
 *.log
 .vercel
+demo-memes-copyrighted/
+harvest/

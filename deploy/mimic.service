@@ -1,0 +1,25 @@
+[Unit]
+Description=Mimic Photo Booth - 表情包素材库
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=__APP_DIR__
+EnvironmentFile=/etc/mimic.env
+ExecStart=/usr/bin/node serve.mjs
+Restart=always
+RestartSec=3
+
+# 这个服务会往 memes/ 写文件，除此之外不需要任何权限
+User=root
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=full
+ProtectHome=yes
+ReadWritePaths=__APP_DIR__/memes
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
