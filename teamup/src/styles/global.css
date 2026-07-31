@@ -1,0 +1,512 @@
+/* ==========================================================================
+   队友招募墙 —— 「岛上的公告板」
+   动森的岛：天空 → 草地，纸条用叶子别在地上，歪歪地散落着。
+   组件本体来自 animal-island-ui，这里只负责它周围的空气：底色、纹理、排布、动效。
+   ========================================================================== */
+
+:root {
+  /* 组件库的设计 token 没有以 CSS 变量暴露，这些值是从它编译后的 CSS 里抄下来的，
+     抄一遍是为了让卡片外面的元素跟组件内部严丝合缝。 */
+  --ink: #725d42; /* 正文棕 */
+  /* 组件库自己的次级色 #8f734f 在纸色上只有 3.98:1，小字读着发虚，往下压到 4.99:1 */
+  --ink-soft: #7d6444; /* 次级文字 */
+  --parchment: #f7f3df; /* 卡片纸色 */
+  --teal: #19c8b9; /* 组件库强调色 */
+  --focus: #f5c31c;
+
+  /* 岛 */
+  --grass-1: #93d97f;
+  --grass-2: #6fc177;
+  --grass-3: #55a866;
+  --sky-1: #a9e4f2;
+  --sky-2: #cdeee4;
+  --sand: #f4e3bb;
+
+  --shadow-card: 0 10px 0 rgba(61, 52, 40, 0.1), 0 18px 34px rgba(37, 62, 34, 0.26);
+  --shadow-card-hover: 0 16px 0 rgba(61, 52, 40, 0.1), 0 30px 52px rgba(37, 62, 34, 0.32);
+
+  --radius-lg: 26px;
+  --maxw: 1360px;
+
+  --font: Nunito, 'Noto Sans SC', -apple-system, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* 云朵是故意伸出画面外的装饰，别让它们在窄屏上撑出一条横向滚动条。
+     用 clip 而不是 hidden —— hidden 会生成滚动容器，把筛选栏的 sticky 顶掉。 */
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: var(--font);
+  /* 中文正文不低于 500，400 在这个纸色背景上读起来发虚 */
+  font-weight: 500;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
+  background-color: var(--grass-2);
+}
+
+/* --------------------------------------------------------------------------
+   岛的底色
+   --------------------------------------------------------------------------
+   本来是 body 上的 background-attachment: fixed，但这页有一万四千像素高，
+   fixed 背景会让浏览器每帧重绘整个视口，滚动直接掉帧。
+   改成一个独立的 fixed 图层：只绘一次，滚动时完全不参与合成。
+   -------------------------------------------------------------------------- */
+
+.island-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    /* 草地上的斜向格纹，动森地面的招牌质感 */
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.055) 0 18px,
+      rgba(255, 255, 255, 0) 18px 36px
+    ),
+    repeating-linear-gradient(-45deg, rgba(20, 70, 30, 0.045) 0 18px, rgba(20, 70, 30, 0) 18px 36px),
+    /* 顶上一段天空，往下化进草地 */
+      linear-gradient(
+        180deg,
+        var(--sky-1) 0,
+        var(--sky-2) 22%,
+        var(--grass-1) 46%,
+        var(--grass-2) 74%,
+        var(--grass-3) 100%
+      );
+}
+
+/* 草地的暗角，把视线收到中间 */
+.island-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 80% at 50% 30%, transparent 55%, rgba(28, 62, 30, 0.24) 100%);
+}
+
+#root {
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+}
+
+/* --------------------------------------------------------------------------
+   页面骨架
+   -------------------------------------------------------------------------- */
+
+.page {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 clamp(16px, 4vw, 40px) 0;
+}
+
+/* --------------------------------------------------------------------------
+   头部：招牌 + 数字 + 说明
+   -------------------------------------------------------------------------- */
+
+.hero {
+  position: relative;
+  padding: clamp(36px, 7vw, 76px) 0 clamp(20px, 3vw, 32px);
+  text-align: center;
+}
+
+/* 天上飘的云 */
+.hero__cloud {
+  position: absolute;
+  top: 0;
+  fill: #fff;
+  opacity: 0.85;
+  pointer-events: none;
+  animation: drift 34s linear infinite;
+}
+.hero__cloud--a {
+  left: -4%;
+  width: 190px;
+  top: 26px;
+  animation-duration: 46s;
+}
+.hero__cloud--b {
+  right: -2%;
+  width: 140px;
+  top: 84px;
+  opacity: 0.7;
+  animation-duration: 62s;
+  animation-direction: reverse;
+}
+
+@keyframes drift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(46px);
+  }
+}
+
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 18px 7px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.86);
+  color: #4f7a3d;
+  font-size: 13.5px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  box-shadow: 0 3px 0 rgba(61, 52, 40, 0.12);
+  margin-bottom: 18px;
+}
+
+.hero__title {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.hero__lead {
+  margin: 22px auto 0;
+  max-width: 46em;
+  font-size: clamp(15px, 1.6vw, 17.5px);
+  line-height: 1.85;
+  font-weight: 600;
+  color: #2f5a2c;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+.hero__lead b {
+  font-weight: 800;
+  color: #1f4a20;
+}
+
+/* 三个数字，做成木牌 */
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.stat {
+  min-width: 116px;
+  padding: 12px 20px 13px;
+  border-radius: 18px;
+  background: var(--parchment);
+  border: 2.5px solid #e0d5ae;
+  box-shadow: 0 5px 0 rgba(61, 52, 40, 0.13);
+}
+
+.stat__num {
+  display: block;
+  font-size: 30px;
+  line-height: 1.05;
+  font-weight: 900;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat__label {
+  display: block;
+  margin-top: 3px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+}
+
+/* --------------------------------------------------------------------------
+   筛选栏
+   -------------------------------------------------------------------------- */
+
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  margin: 26px 0 30px;
+  padding: 14px clamp(12px, 2vw, 20px);
+  border-radius: var(--radius-lg);
+  background: rgba(247, 243, 223, 0.94);
+  backdrop-filter: blur(10px);
+  border: 3px solid #e6dcb8;
+  box-shadow: 0 6px 0 rgba(61, 52, 40, 0.12), 0 14px 30px rgba(37, 62, 34, 0.18);
+}
+
+.toolbar__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+}
+
+.toolbar__row + .toolbar__row {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 2px dashed rgba(143, 115, 79, 0.28);
+}
+
+/* Tabs 在这里只当分段控件用，内容区由下面的卡片墙承担 —— 把它的空面板收掉。
+   组件库的类名带哈希后缀，用前缀匹配保证换版本也不失效。 */
+.toolbar [class*='animal-tabs-'] {
+  flex: 0 1 auto;
+  /* flex item 默认 min-width:auto，会被里面 nowrap 的标签撑到最小内容宽度，
+     进而把整个筛选栏推出屏幕。归零之后才轮得到下面那条 overflow-x 生效。 */
+  min-width: 0;
+}
+.toolbar [class*='animal-tabContent-'] {
+  display: none;
+}
+.toolbar [class*='animal-tabList-'] {
+  margin-bottom: 0;
+  flex-wrap: nowrap;
+}
+/* 「项目招募中」不能在中间断成两行 */
+.toolbar [class*='animal-tabItem-'],
+.toolbar [class*='animal-tabLabel-'] {
+  white-space: nowrap;
+}
+
+.toolbar__label {
+  flex: none;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--ink-soft);
+  letter-spacing: 0.05em;
+}
+
+.toolbar__search {
+  flex: 1 1 240px;
+  min-width: 200px;
+  max-width: 380px;
+  margin-left: auto;
+}
+
+.toolbar__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* 组件库的 Tag 在未选中时是 outlined，选中态额外加一圈光晕 */
+.tag-toggle {
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+.tag-toggle[data-on='true'] {
+  box-shadow: 0 0 0 3px rgba(245, 195, 28, 0.5), 0 3px 8px rgba(61, 52, 40, 0.2);
+}
+
+.toolbar__reset {
+  margin-left: auto;
+}
+
+.toolbar__count {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--ink-soft);
+}
+.toolbar__count b {
+  font-size: 16px;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --------------------------------------------------------------------------
+   卡片墙
+   -------------------------------------------------------------------------- */
+
+.wall {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(286px, 1fr));
+  gap: clamp(22px, 2.6vw, 34px);
+  padding-bottom: 26px;
+  list-style: none;
+  margin: 0;
+}
+
+.wall__empty {
+  grid-column: 1 / -1;
+  padding: 56px 24px;
+  text-align: center;
+  border-radius: var(--radius-lg);
+  background: rgba(247, 243, 223, 0.9);
+  border: 3px dashed #d9cca2;
+  color: var(--ink-soft);
+  font-weight: 700;
+}
+.wall__empty strong {
+  display: block;
+  font-size: 19px;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+/* --------------------------------------------------------------------------
+   页脚
+   -------------------------------------------------------------------------- */
+
+/* 页脚压在最深的一段草地上，直接写字对比度不够，垫一块纸板 */
+.foot {
+  position: relative;
+  padding: 4px 16px 44px;
+  text-align: center;
+}
+
+.foot__plate {
+  max-width: 44em;
+  margin: 0 auto;
+  padding: 18px 26px 20px;
+  border-radius: var(--radius-lg);
+  background: rgba(247, 243, 223, 0.93);
+  border: 3px solid #e6dcb8;
+  box-shadow: 0 5px 0 rgba(61, 52, 40, 0.14);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.95;
+  color: var(--ink-soft);
+}
+
+.foot a {
+  color: #17756e;
+  font-weight: 800;
+  text-underline-offset: 3px;
+}
+
+.foot__note {
+  margin: 0;
+}
+.foot__note + .foot__note {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 2px dashed rgba(125, 100, 68, 0.25);
+}
+
+/* 跳过装饰、直达内容 */
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 100;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: var(--parchment);
+  color: var(--ink);
+  font-weight: 800;
+  box-shadow: 0 4px 0 rgba(61, 52, 40, 0.2);
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 12px;
+}
+
+/* --------------------------------------------------------------------------
+   窄屏
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 760px) {
+  .hero {
+    padding-top: 30px;
+  }
+  .hero__lead {
+    font-size: 14.5px;
+    line-height: 1.9;
+  }
+  .hero__cloud--a {
+    width: 120px;
+    left: 0;
+  }
+  .hero__cloud--b {
+    width: 88px;
+    right: 0;
+  }
+
+  /* 三个数字挤在一行，别折成 2+1 */
+  .stats {
+    gap: 8px;
+  }
+  .stat {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 10px 8px 11px;
+  }
+  .stat__num {
+    font-size: 24px;
+  }
+  .stat__label {
+    font-size: 11px;
+    letter-spacing: 0;
+  }
+
+  /* 筛选栏在窄屏会撑到大半个屏幕，再 sticky 就没地方看卡片了 —— 让它随页面滚走，
+     回顶部交给右下角的 BackTop。 */
+  .toolbar {
+    position: static;
+    padding: 12px;
+  }
+  .toolbar__row {
+    gap: 8px 10px;
+  }
+  /* 三个分段在 390px 上差 70px 装不下。先把内边距和字号收一档让它们挤进去，
+     真挤不下（比如更窄的屏）再横向滚动兜底。 */
+  .toolbar [class*='animal-tabList-'] {
+    overflow-x: auto;
+    scrollbar-width: none;
+    max-width: 100%;
+    padding: 10px;
+    gap: 2px;
+  }
+  .toolbar [class*='animal-tabList-']::-webkit-scrollbar {
+    display: none;
+  }
+  .toolbar [class*='animal-tabItem-'] {
+    padding: 7px 9px;
+    gap: 4px;
+  }
+  .toolbar [class*='animal-tabLabel-'] {
+    font-size: 13px;
+  }
+  /* 单选小圆点在窄屏上占掉近 50px。选中态本来就是一颗填满的青色药丸 + 叶子，
+     不靠这个圆点也看得出来，窄屏上直接收掉。 */
+  .toolbar [class*='animal-tabIcon-'] {
+    display: none;
+  }
+  .toolbar__search {
+    flex: 1 1 100%;
+    max-width: none;
+    margin-left: 0;
+  }
+  .toolbar__count {
+    margin-left: auto;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   全局可达性
+   -------------------------------------------------------------------------- */
+
+:where(a, button, [role='button'], input):focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

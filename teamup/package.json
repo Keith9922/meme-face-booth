@@ -1,0 +1,25 @@
+{
+  "name": "teamup-wall",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "创作者黑客松 · 队友招募墙 —— 动森风格组队匹配页",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "sync": "node scripts/sync-feishu.mjs",
+    "sync:api": "node scripts/sync-feishu.mjs --api"
+  },
+  "dependencies": {
+    "animal-island-ui": "^1.4.0",
+    "classnames": "^2.5.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.7.0",
+    "vite": "^6.4.3"
+  }
+}
