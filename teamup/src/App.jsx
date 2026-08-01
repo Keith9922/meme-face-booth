@@ -181,6 +181,21 @@ export default function App() {
           <p className="hero__lead">
             正面是<b>「在做什么」</b>，翻过来是<b>「谁在做、怎么找到 ta」</b>。
           </p>
+
+          {/* 发点子这一步原来只在页脚有个不起眼的链接，
+              但对话里说的是「发点子也在这一页操作」—— 得给它一个显眼的入口。 */}
+          <a
+            className="hero__cta"
+            href={wall.source.wiki}
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <span aria-hidden="true">✍️</span>
+            发布我的点子
+            {/* 不写「填完立刻出现」—— 新提交要等同步任务跑过才会上墙，
+                定时器还没配上飞书凭据之前，那句话是假的。 */}
+            <small>记得写清楚缺什么角色</small>
+          </a>
         </header>
 
         <NavBar
