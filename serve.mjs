@@ -23,7 +23,11 @@ const LOCAL_ONLY = HOST === '127.0.0.1' || HOST === 'localhost';
      设了 ADMIN_TOKEN      → 开，但每次写都要带上 token
      既非本机又没 token    → 关。放公网上的无鉴权写接口 = 谁都能上传和删除。 */
 const ALLOW_WRITE = LOCAL_ONLY || !!TOKEN;
-const needToken = () => !LOCAL_ONLY && !!TOKEN;
+
+/* 只要配了 token 就一定校验，不因「绑定在 127.0.0.1」而放行。
+   反向代理场景下本机绑定不再等于本机信任：nginx 从公网收到请求后再转发到
+   127.0.0.1，服务看到的源地址永远是本机，按绑定地址免鉴权等于门户大开。 */
+const needToken = () => !!TOKEN;
 
 /* 定长比较，避免用比较耗时反推 token */
 function tokenOk(req){
