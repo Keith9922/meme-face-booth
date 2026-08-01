@@ -193,6 +193,48 @@ body {
   color: #1f4a20;
 }
 
+/* 发点子的主入口。用组件库主按钮那套 3D 语言：底下一层实心影，按下去会陷进去 */
+.hero__cta {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 9px;
+  margin-top: 18px;
+  padding: 12px 26px 13px;
+  border-radius: 999px;
+  background: #f5a623;
+  border: 2.5px solid #d98c10;
+  box-shadow: 0 5px 0 #c07d0c, 0 12px 22px rgba(37, 62, 34, 0.24);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 900;
+  text-decoration: none;
+  text-shadow: 0 1px 0 rgba(140, 88, 8, 0.45);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.18s ease;
+}
+.hero__cta:hover {
+  background: #ffb43a;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 0 #c07d0c, 0 16px 26px rgba(37, 62, 34, 0.28);
+}
+.hero__cta:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 #c07d0c;
+}
+.hero__cta small {
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0.92;
+}
+
+@media (max-width: 560px) {
+  .hero__cta {
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 11px 22px 12px;
+  }
+}
+
 /* 三个数字，做成木牌 */
 .stats {
   display: flex;
