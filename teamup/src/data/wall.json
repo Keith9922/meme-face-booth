@@ -5,11 +5,11 @@
     "tableId": "tblvUyDXyVq6tS3E",
     "via": "lark-cli"
   },
-  "syncedAt": "2026-08-01T00:29:37.338Z",
+  "syncedAt": "2026-08-01T01:06:32.298Z",
   "counts": {
-    "total": 100,
-    "project": 67,
-    "seeker": 33
+    "total": 94,
+    "project": 64,
+    "seeker": 30
   },
   "entries": [
     {
@@ -20,7 +20,7 @@
       "project": "梦晓记",
       "intro": "ai心理解梦产品",
       "nickname": "阳升",
-      "contact": "",
+      "contact": "luckyonee",
       "recruit": [
         "🎨 设计（UI、UX、视觉、视频等）"
       ],
@@ -41,15 +41,16 @@
       "submittedAt": "2026-07-28 13:54:34"
     },
     {
-      "id": "007",
-      "recordId": "recvqPuzpJONjR",
+      "id": "089",
+      "recordId": "recvqXsdhLLwlb",
       "kind": "project",
-      "seed": 0.0072,
+      "seed": 0.9976,
       "project": "往生簿",
       "intro": "一个治 ADHD 的数字断舍离工具：把那些永远做不完和不会开始的 To-do 和想法变成生命额度，每条想法 entry 都会消耗一个出生额度，变成一只只电子宠物，你不更新它，它就会当着你的面慢慢go die，举办葬礼，往生，成为新额度。",
       "nickname": "Zongyan",
-      "contact": "",
+      "contact": "17887954074",
       "recruit": [
+        "💡 创意 / 产品（想法策划、需求分析、产品设计）",
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "🎨 设计（UI、UX、视觉、视频等）",
         "📢 内容 / 运营（内容策划、推广、用户运营）"
@@ -57,19 +58,19 @@
       "recruitOther": "",
       "skills": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）",
-        "📢 内容 / 运营（内容策划、推广、用户运营）",
-        "🎨 设计（UI、UX、视觉、视频等）"
+        "🎨 设计（UI、UX、视觉、视频等）",
+        "📢 内容 / 运营（内容策划、推广、用户运营）"
       ],
       "skillsOther": "",
-      "stage": "刚有一个想法",
+      "stage": "已经有方案设计",
       "teamMode": "希望招募队友一起完成",
-      "intent": "🌟 我既可以发起创造计划，也愿意加入其他团队",
+      "intent": "🚀 我有明确的创造计划，希望发起项目",
       "position": "🌟 主导项目 / 推动方向",
       "motivation": "我喜欢把想法做出来，并完成一个作品",
       "matchHelp": "✅ 可以，希望推荐项目或队友",
       "teamed": "",
       "extra": "",
-      "submittedAt": "2026-07-30 13:00:36"
+      "submittedAt": "2026-07-31 21:41:25"
     },
     {
       "id": "008",
@@ -79,7 +80,7 @@
       "project": "东方赛博美学",
       "intro": "打算用AI做一个面部诊断的小工具，可以让大家上传自己的照片，然后AI给出建议她适合做什么医美项目，或者是用AI给出来，她比较像哪个明星的气质，让她按照这个路线变美参考",
       "nickname": "sally",
-      "contact": "",
+      "contact": "13425781884",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "🎨 设计（UI、UX、视觉、视频等）",
@@ -110,7 +111,7 @@
       "project": "叙光Creator",
       "intro": "面向自媒体创作者的一站式运营与商务PR对接平台，提供内容工具、运营指导，搭建博主与品牌双向沟通桥梁",
       "nickname": "繁星",
-      "contact": "",
+      "contact": "15756252609",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "🎨 设计（UI、UX、视觉、视频等）"
@@ -139,7 +140,7 @@
       "project": "乐理小达人",
       "intro": "乐理学习平权，让更多的人能够把学习乐理变得有趣又更简单或循序渐进",
       "nickname": "chunny白小纯",
-      "contact": "",
+      "contact": "_Timereveals71",
       "recruit": [
         "🎨 设计（UI、UX、视觉、视频等）",
         "💻 技术开发（前端、后端、AI、算法、小程序等）"
@@ -168,7 +169,7 @@
       "project": "干出个名堂",
       "intro": "做项目第一步最重要的就是起名字！避免自己的名字/商标和别人撞车！",
       "nickname": "徐兆猛",
-      "contact": "",
+      "contact": "ixuzhaomeng",
       "recruit": [
         "🎨 设计（UI、UX、视觉、视频等）"
       ],
@@ -198,7 +199,7 @@
       "project": "完蛋 没想好",
       "intro": "现场想可以吗 现在脑子宕机了",
       "nickname": "luckyjess",
-      "contact": "",
+      "contact": "13681978056",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）"
       ],
@@ -225,7 +226,7 @@
       "project": "半杯席",
       "intro": "一杯酒、一个故事、一个问题，交换人生故事，探究人生问题",
       "nickname": "岛主坤坤",
-      "contact": "",
+      "contact": "13816609560",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "🎨 设计（UI、UX、视觉、视频等）",
@@ -256,7 +257,7 @@
       "project": "基于kg与llm的模型",
       "intro": "通过知识库构建ai的agent调用",
       "nickname": "yui",
-      "contact": "",
+      "contact": "wxid_x06i9le51upj22",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "🎨 设计（UI、UX、视觉、视频等）"
@@ -284,7 +285,7 @@
       "project": "EchoEcho 响响",
       "intro": "跨越时间的治愈智能体——把你随手拍下的小确幸静默孵化成守护灵，在你最疲惫的时刻主动Say Hi，用荒诞温柔化解孤独和疲倦。",
       "nickname": "Samgogo",
-      "contact": "",
+      "contact": "livemylifesince1997",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "🎨 设计（UI、UX、视觉、视频等）",
@@ -314,7 +315,7 @@
       "project": "记忆对岸— 阿尔茨海默患者记忆辅助工具",
       "intro": "阿尔茨海默早期患者和家属面临巨大的照护压力，患者反复遗忘近期事件、认不出亲人，家属不知道如何有效沟通，可以建立家属端，患者端，ai分析双方记录得出情感波动",
       "nickname": "睿子（线下已组队）",
-      "contact": "",
+      "contact": "yikouruizi_778",
       "recruit": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）"
       ],
@@ -342,7 +343,7 @@
       "project": "上海话学习产品",
       "intro": "基于现有自媒体上海话语料库创造一个教小朋友上海话的产品",
       "nickname": "林仙子",
-      "contact": "",
+      "contact": "linzhu111111",
       "recruit": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）",
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
@@ -373,7 +374,7 @@
       "project": "AI 学习力—孩子用 AI 学习，最怕的不是不会用，而是只会抄答案。",
       "intro": "AI赋能全科：AI素养与高效学习提升",
       "nickname": "张既明",
-      "contact": "",
+      "contact": "13011745921",
       "recruit": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）",
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
@@ -405,7 +406,7 @@
       "project": "小红书爆款选题分析",
       "intro": "帮助小红书创作者找出爆款选题",
       "nickname": "泡芙",
-      "contact": "",
+      "contact": "mingqingzs",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "🎨 设计（UI、UX、视觉、视频等）"
@@ -434,7 +435,7 @@
       "project": "回响",
       "intro": "笔记不是收藏，而是推动行动，念念不忘，AI 给你回响",
       "nickname": "诸葛亮亮的挚友（线下已组队）",
-      "contact": "",
+      "contact": "Don_Gatsby1118",
       "recruit": [
         "📢 内容 / 运营（内容策划、推广、用户运营）",
         "💻 技术开发（前端、后端、AI、算法、小程序等）"
@@ -463,7 +464,7 @@
       "project": "LifeFlow",
       "intro": "很多人每天都在努力生活，但很少有机会真正去努力了解自己的状态、情绪、困惑和变化。我希望做一个 AI 工具，帮助用户记录每日想法、情绪、目标和烦恼，通过 AI 分析生成个人阶段性的反馈报告，帮助用户发现自己的行为模式，察觉自己的状态和变化，并在不同阶段给予成长建议。",
       "nickname": "季维",
-      "contact": "",
+      "contact": "13184417099",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "📢 内容 / 运营（内容策划、推广、用户运营）"
@@ -493,7 +494,7 @@
       "project": "社群知识助手",
       "intro": "计划打造一款用于帮助用户整理社群信息的 AI Agent，可自动提炼群聊重点，发现有价值内容，并支持快速检索历史讨论。",
       "nickname": "兮兮",
-      "contact": "",
+      "contact": "luoluohhhhh",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "🎨 设计（UI、UX、视觉、视频等）",
@@ -524,7 +525,7 @@
       "project": "灵感树",
       "intro": "“灵感树”是一款帮助创作者把模糊、零散、尚未成形的素材逐步发展为完整创意的 AI 共创工具",
       "nickname": "凌风",
-      "contact": "",
+      "contact": "Steven-foy0609",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "💡 创意 / 产品（想法策划、需求分析、产品设计）"
@@ -553,7 +554,7 @@
       "project": "幸福+++",
       "intro": "AI让人更幸福",
       "nickname": "彭彭",
-      "contact": "",
+      "contact": "13817625185",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "📢 内容 / 运营（内容策划、推广、用户运营）",
@@ -584,7 +585,7 @@
       "project": "山河无名",
       "intro": "《山河无名》是一款以中国历史长河为骨架的章节式历史叙事人生AVG",
       "nickname": "李十六",
-      "contact": "",
+      "contact": "llsl116",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "🎨 设计（UI、UX、视觉、视频等）"
@@ -613,7 +614,7 @@
       "project": "AI原生的期权投资平台网站。或者机器人agent",
       "intro": "基于现有网站，打造适合agent使用的投资功能\n或者在机器人上部署agent，实现对机器人的操纵",
       "nickname": "华哥",
-      "contact": "",
+      "contact": "A588221102",
       "recruit": [
         "🎨 设计（UI、UX、视觉、视频等）",
         "📢 内容 / 运营（内容策划、推广、用户运营）",
@@ -643,7 +644,7 @@
       "project": "银龄稳动",
       "intro": "银龄稳动：一个帮助50及以上中老年人轻松开始居家抗阻运动的产品，提升老后生活质量。",
       "nickname": "赤赤",
-      "contact": "",
+      "contact": "chi0610aaaaa",
       "recruit": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）"
       ],
@@ -671,7 +672,7 @@
       "project": "Capital Master",
       "intro": "炒股桌游",
       "nickname": "Zane",
-      "contact": "",
+      "contact": "zane_genesis_cosmos 或者手机 17694915314",
       "recruit": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）"
       ],
@@ -699,7 +700,7 @@
       "project": "esmeralda",
       "intro": "像读小说一样读论文的app",
       "nickname": "esmeralda",
-      "contact": "",
+      "contact": "17332238492",
       "recruit": [
         "🎨 设计（UI、UX、视觉、视频等）",
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
@@ -731,7 +732,7 @@
       "project": "chinglish",
       "intro": "教人学中式英语",
       "nickname": "大宁",
-      "contact": "",
+      "contact": "13115608737",
       "recruit": [],
       "recruitOther": "",
       "skills": [
@@ -757,7 +758,7 @@
       "project": "2D户型图网站识别工具",
       "intro": "一个网页版的2D户型图的识别网站工具，用户将上传一张房屋户型图并提供尺寸，系统根据识别，再按比例生成个可在第一人称中探索的像素风格3D房屋",
       "nickname": "马静泽",
-      "contact": "",
+      "contact": "Tony18652072420",
       "recruit": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）",
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
@@ -788,7 +789,7 @@
       "project": "Project Seed Bank",
       "intro": "Project Seed Bank 是一个面向创作者的 AI 创意管理与成长平台。它希望改变传统项目管理中“任务列表”的方式，将创意项目看作具有生命力的种子，通过数字花园记录项目从灵感萌芽、探索、成长到完成的全过程。\n未来计划加入 AI Agent「数字园丁」，它不会替用户完成创造，而是在用户授权下理解项目背景、记录创作历程、帮助整理想法、提供阶段性反馈，并在合适的时候提醒用户重新关注被暂时搁置的创意，让长期创作过程获得更多陪伴和连接。",
       "nickname": "小翅膀",
-      "contact": "",
+      "contact": "yz610010520",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "📢 内容 / 运营（内容策划、推广、用户运营）"
@@ -817,7 +818,7 @@
       "project": "拾语（SHIYU）\n通过 AI 启发式提问，帮助用户练习观察、感受和表达的 HarmonyOS 语言训练游戏。",
       "intro": "一句话介绍：一款通过场景观察和 AI 启发式提问，帮助用户恢复细腻表达能力的轻量语言训练游戏。\n核心价值：AI 时代，不只是让机器更会表达，也应该帮助人保持表达能力。",
       "nickname": "韩张阳",
-      "contact": "",
+      "contact": "Han126418",
       "recruit": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）",
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
@@ -849,7 +850,7 @@
       "project": "1、AI产业wiki星云\n2、权力的游戏世界模拟",
       "intro": "用魔法把枯燥的数据变成惊艳的游戏",
       "nickname": "顺天",
-      "contact": "",
+      "contact": "golden_moon",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "🎨 设计（UI、UX、视觉、视频等）",
@@ -878,7 +879,7 @@
       "project": "玄学落地 agent",
       "intro": "打造面向玄学咨询从业者的 AI 智能工作台，通过知识库、推理辅助和自动化流程，将单人服务效率提升数倍，实现高质量咨询服务的规模化交付。",
       "nickname": "无上奶龙大帝",
-      "contact": "",
+      "contact": "alwz361700",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "📢 内容 / 运营（内容策划、推广、用户运营）",
@@ -909,7 +910,7 @@
       "project": "AI➕教育",
       "intro": "辅助大学生升学和求职",
       "nickname": "Kelly",
-      "contact": "",
+      "contact": "zzz_epoch",
       "recruit": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）",
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
@@ -940,7 +941,7 @@
       "project": "听我说",
       "intro": "帮助用户在对话中不偏离目标",
       "nickname": "奥奥",
-      "contact": "",
+      "contact": "17671784041",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "🎨 设计（UI、UX、视觉、视频等）"
@@ -968,7 +969,7 @@
       "project": "灵感不死",
       "intro": "需要把一个想法或一个真实故事变成可传唱的歌曲",
       "nickname": "宁晨辉",
-      "contact": "",
+      "contact": "291545452",
       "recruit": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）",
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
@@ -1000,7 +1001,7 @@
       "project": "自媒体工作台",
       "intro": "为创作者提供从创意构思到视频剪辑的全流程落地支持。",
       "nickname": "Mira",
-      "contact": "",
+      "contact": "Mira199X",
       "recruit": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）"
       ],
@@ -1028,7 +1029,7 @@
       "project": "回声记忆 Echo Memory — AI 的决策记忆层",
       "intro": "一款本地优先的 AI 决策记忆层：把会议录音转成带时间戳的可搜索知识库，通过只读 MCP 让 AI 工具有出处地调用历史决策。",
       "nickname": "艺峰同学",
-      "contact": "",
+      "contact": "18621339797",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "🎨 设计（UI、UX、视觉、视频等）",
@@ -1058,7 +1059,7 @@
       "project": "文字人生-打破自我设限",
       "intro": "一款关于“打破自我设限”的文字人生模拟游戏。玩家在年龄、家庭、资源和随机事件的限制中不断选择，最终发现：人生没有标准答案，也不存在真正意义上的“太晚了”。",
       "nickname": "Yuli",
-      "contact": "",
+      "contact": "MY7108859956",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "📢 内容 / 运营（内容策划、推广、用户运营）"
@@ -1087,7 +1088,7 @@
       "project": "《关系》",
       "intro": "想做一个用线和柔软躯体探索亲密关系的闯关游戏，有音乐元素，以比较梦幻和感性的画面呈现，希望大家在玩的过程中感知到健康/不健康的亲密关系带来的感受。",
       "nickname": "空调外机",
-      "contact": "",
+      "contact": "drops1970",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "🎨 设计（UI、UX、视觉、视频等）",
@@ -1117,7 +1118,7 @@
       "project": "创作者工作台",
       "intro": "工作台管理工具",
       "nickname": "洛洛",
-      "contact": "",
+      "contact": "19851308858",
       "recruit": [],
       "recruitOther": "",
       "skills": [
@@ -1143,7 +1144,7 @@
       "project": "直播运营工具箱",
       "intro": "目标明确 架构规划清晰",
       "nickname": "jie",
-      "contact": "",
+      "contact": "zjie_420",
       "recruit": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）",
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
@@ -1173,7 +1174,7 @@
       "project": "PurpleInk",
       "intro": "为Vibe coding产品做产品发布视频",
       "nickname": "燕耳Firenze",
-      "contact": "",
+      "contact": "Yaner_eth",
       "recruit": [],
       "recruitOther": "",
       "skills": [
@@ -1201,7 +1202,7 @@
       "project": "自定义语言打卡",
       "intro": "语言学习打卡要不就内容没有很契合，要不就打卡页面没有符合期待，想做一个自定义个性化的模式",
       "nickname": "水松",
-      "contact": "",
+      "contact": "Op-q0F",
       "recruit": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）",
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
@@ -1232,7 +1233,7 @@
       "project": "文字博物馆数字交互网页",
       "intro": "在博物馆里找到一个文字的前世今生",
       "nickname": "wpai（派派）",
-      "contact": "",
+      "contact": "wpai314159",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "📢 内容 / 运营（内容策划、推广、用户运营）"
@@ -1260,7 +1261,7 @@
       "project": "问道山房",
       "intro": "一款结合闽南地区和潮汕风俗的玄学ai命理分析产品，更有ai地理堪舆等好玩的功能",
       "nickname": "DragonChen",
-      "contact": "",
+      "contact": "YiWenSwag",
       "recruit": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）",
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
@@ -1292,7 +1293,7 @@
       "project": "拖延探索笔记本二次开发",
       "intro": "拖延探索笔记本二次开发，新增宠物陪伴成长功能",
       "nickname": "振北汪汪",
-      "contact": "",
+      "contact": "15314244412",
       "recruit": [],
       "recruitOther": "",
       "skills": [
@@ -1310,14 +1311,14 @@
       "submittedAt": "2026-07-31 19:42:40"
     },
     {
-      "id": "077",
-      "recordId": "rec27TBsnM0Erh",
+      "id": "092",
+      "recordId": "rec27TDW7U0nhL",
       "kind": "project",
-      "seed": 0.7573,
-      "project": "基于AI-工程设计咨询行业领域的知识库的搭建及生产应用系统开发",
-      "intro": "1、目前是把建筑、公路、市政行业7000本标准规范在经过提取标准化结构数据之后、基于milvus和enbedding等建立向量化知识库，可以实现标准规范的在线查询、源文件预览。后期还可以把几千份可研报告、初步设计、施工图设计全套图纸做提取、向量化入库。\n2、基于这个知识库底座，完成20大功能模块的开发（目前标准规范的在线查询和源文件预览已经跑通，可研报告生成也已经拉通，图纸自动审查、造价咨询（估算、概算、预算、结算、决算）自动化的模块的框架已经搭好了，正在推进中，其余模块也都在积极准备中）。\n3、已经通过驾驶舱将跨设备的多智能体之间分工协作、沟通、审核、巡检、执行全套系统打通，可以实现云端、家里电脑、随身携带的笔记本电脑及手机端操控整个项目的系统开发。\n4、欢迎志同道合的同志一起创造未来，为社会做一点贡献，早点实现通用人工智能，解放全人类。",
+      "seed": 0.8565,
+      "project": "基于AI工程实际行业（建筑、市政、公路）知识库搭建及应用生态开发",
+      "intro": "1、7000多本标准、规范设计建筑、市政、公路三大行业的向量化的知识库底座已经搭建好了；\n2、基于知识库底座的四大模块（规范标准的在线查询（可追溯源文件）、可研报告的自动生成（建筑、市政、公路三大行业），已经完成，还有十六大模块正在搭建。\n3、跨设备多智能体驾驶舱已经搭建好了，可以实现异地将云端（claude、codex、kimicode、hermes）、家里的dgx spark（claude、codex、kimicode、hermes）、随身携带的笔记本电脑（claude、codex、kimicode、hermes），通过手机远程遥控指挥他们之间的分工、协作，避免单一模型自说自话，自己当运动员又当裁判员，可以根据任务类型的难易程度及各智能体及模型各自擅长，对一个项目进行任务分解之后，通过沟通机制，对他们进行分工，编代码、审核、巡检、反馈及对用户的反馈，全部自动化操作。",
       "nickname": "淡定",
-      "contact": "",
+      "contact": "17771921111",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）"
       ],
@@ -1332,9 +1333,9 @@
       "position": "🌟 主导项目 / 推动方向",
       "motivation": "我喜欢把想法做出来，并完成一个作品",
       "matchHelp": "✅ 可以，希望推荐项目或队友",
-      "teamed": "未填写",
-      "extra": "1、寻找志同道合的人沿着这个道路走下去；\n2、对这个方向的感兴趣的企业、院校、尤其是投资人（目前我已经连续两个多月每天只休息4-5个小时，目前已经初见雏形），还请能帮忙联系；\n3、因为kimi的额度限制，不买加油包基本上动不了，希望能解决额度限制问题，或者帮忙把claude或者gpt的官方模型打通，并且不用受封号的限制。\n4、我是真心喜欢AI，并且想用AI做成一点事情，恳请活动方能给与技术和经费（够加油包使用就行）支持。",
-      "submittedAt": "2026-07-31 19:55:56"
+      "teamed": "",
+      "extra": "希望的到技术支撑及投资人资助（经费有限，可以合作）",
+      "submittedAt": "2026-07-31 22:21:29"
     },
     {
       "id": "078",
@@ -1344,7 +1345,7 @@
       "project": "创友",
       "intro": "创友是一款面向创作者的社交疗愈平台，帮助创作者找到同频伙伴，缓解创作焦虑与孤独。",
       "nickname": "赞赞",
-      "contact": "",
+      "contact": "19510174696",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "🎨 设计（UI、UX、视觉、视频等）"
@@ -1373,7 +1374,7 @@
       "project": "旺旺门铃管家",
       "intro": "旺旺看门，实时追踪外卖快递情况，实现0沟通点外卖，收退快递，居家友好，守护好家门口那一亩三分地",
       "nickname": "Angela",
-      "contact": "",
+      "contact": "13660010998",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "💡 创意 / 产品（想法策划、需求分析、产品设计）",
@@ -1404,7 +1405,7 @@
       "project": "日常记录&养成系AI宠物APP",
       "intro": "日常记录，以你人生中的正向经历为养料，收获一只懂你的AI宠物伙伴",
       "nickname": "紫苏",
-      "contact": "",
+      "contact": "zzishu2626",
       "recruit": [],
       "recruitOther": "",
       "skills": [
@@ -1430,7 +1431,7 @@
       "project": "等待一个霸气的名字",
       "intro": "想要做像影视工业一样场记表，导入大疆or手机拍的很多素材，排序、筛选、排布，适用volg或中长视频/个人微电影",
       "nickname": "除",
-      "contact": "",
+      "contact": "neverforEVA",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "💡 创意 / 产品（想法策划、需求分析、产品设计）",
@@ -1460,7 +1461,7 @@
       "project": "答案之书赛博版",
       "intro": "面对抉择犹豫不定的时候可以翻开体验，让心情稳定下来",
       "nickname": "竞仪",
-      "contact": "",
+      "contact": "huan3681",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "🎨 设计（UI、UX、视觉、视频等）"
@@ -1489,7 +1490,7 @@
       "project": "小伴",
       "intro": "儿童画像驱动的育儿app",
       "nickname": "angel",
-      "contact": "",
+      "contact": "17865163290",
       "recruit": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）",
         "🎨 设计（UI、UX、视觉、视频等）",
@@ -1519,7 +1520,7 @@
       "project": "Pre-Talk",
       "intro": "这是一个 自己与自己 进行短期沟通的小型agent工具/亦或是skill，它类似一个多agent圆桌，可以在此对一个想法进行较为复杂深入地讨论",
       "nickname": "山茶",
-      "contact": "",
+      "contact": "CamelliaTse33",
       "recruit": [],
       "recruitOther": "",
       "skills": [
@@ -1545,7 +1546,7 @@
       "project": "Art History Twin",
       "intro": "一个让创作者沿着时间、地域与作品关系，自由穿行世界美术史的 AI 原生互动世界",
       "nickname": "Joey",
-      "contact": "",
+      "contact": "16622301180",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "🎨 设计（UI、UX、视觉、视频等）",
@@ -1568,100 +1569,6 @@
       "submittedAt": "2026-07-31 21:35:38"
     },
     {
-      "id": "087",
-      "recordId": "recvqXsablDl4d",
-      "kind": "project",
-      "seed": 0.3018,
-      "project": "往生簿",
-      "intro": "一个治 ADHD 的数字断舍离工具：把那些永远做不完和不会开始的 To-do 和想法变成生命额度，每条想法 entry 都会消耗一个出生额度，变成一只只电子宠物，你不更新它，它就会当着你的面慢慢go die，举办葬礼，往生，成为新额度。",
-      "nickname": "Zongyan",
-      "contact": "",
-      "recruit": [
-        "💻 技术开发（前端、后端、AI、算法、小程序等）",
-        "🎨 设计（UI、UX、视觉、视频等）",
-        "📢 内容 / 运营（内容策划、推广、用户运营）"
-      ],
-      "recruitOther": "",
-      "skills": [
-        "💡 创意 / 产品（想法策划、需求分析、产品设计）",
-        "📢 内容 / 运营（内容策划、推广、用户运营）",
-        "🎨 设计（UI、UX、视觉、视频等）"
-      ],
-      "skillsOther": "",
-      "stage": "刚有一个想法",
-      "teamMode": "希望招募队友一起完成",
-      "intent": "🌟 我既可以发起创造计划，也愿意加入其他团队",
-      "position": "🌟 主导项目 / 推动方向",
-      "motivation": "我喜欢把想法做出来，并完成一个作品",
-      "matchHelp": "✅ 可以，希望推荐项目或队友",
-      "teamed": "",
-      "extra": "",
-      "submittedAt": "2026-07-31 21:41:13"
-    },
-    {
-      "id": "088",
-      "recordId": "recvqXsbdkizGq",
-      "kind": "project",
-      "seed": 0.8079,
-      "project": "往生簿",
-      "intro": "一个治 ADHD 的数字断舍离工具：把那些永远做不完和不会开始的 To-do 和想法变成生命额度，每条想法 entry 都会消耗一个出生额度，变成一只只电子宠物，你不更新它，它就会当着你的面慢慢go die，举办葬礼，往生，成为新额度。",
-      "nickname": "Zongyan",
-      "contact": "",
-      "recruit": [
-        "💻 技术开发（前端、后端、AI、算法、小程序等）",
-        "🎨 设计（UI、UX、视觉、视频等）",
-        "📢 内容 / 运营（内容策划、推广、用户运营）"
-      ],
-      "recruitOther": "",
-      "skills": [
-        "💡 创意 / 产品（想法策划、需求分析、产品设计）",
-        "📢 内容 / 运营（内容策划、推广、用户运营）",
-        "🎨 设计（UI、UX、视觉、视频等）"
-      ],
-      "skillsOther": "",
-      "stage": "刚有一个想法",
-      "teamMode": "希望招募队友一起完成",
-      "intent": "🌟 我既可以发起创造计划，也愿意加入其他团队",
-      "position": "🌟 主导项目 / 推动方向",
-      "motivation": "我喜欢把想法做出来，并完成一个作品",
-      "matchHelp": "✅ 可以，希望推荐项目或队友",
-      "teamed": "",
-      "extra": "",
-      "submittedAt": "2026-07-31 21:41:17"
-    },
-    {
-      "id": "089",
-      "recordId": "recvqXsdhLLwlb",
-      "kind": "project",
-      "seed": 0.9976,
-      "project": "往生簿",
-      "intro": "一个治 ADHD 的数字断舍离工具：把那些永远做不完和不会开始的 To-do 和想法变成生命额度，每条想法 entry 都会消耗一个出生额度，变成一只只电子宠物，你不更新它，它就会当着你的面慢慢go die，举办葬礼，往生，成为新额度。",
-      "nickname": "Zongyan",
-      "contact": "",
-      "recruit": [
-        "💡 创意 / 产品（想法策划、需求分析、产品设计）",
-        "💻 技术开发（前端、后端、AI、算法、小程序等）",
-        "🎨 设计（UI、UX、视觉、视频等）",
-        "📢 内容 / 运营（内容策划、推广、用户运营）"
-      ],
-      "recruitOther": "",
-      "skills": [
-        "💡 创意 / 产品（想法策划、需求分析、产品设计）",
-        "🎨 设计（UI、UX、视觉、视频等）",
-        "📢 内容 / 运营（内容策划、推广、用户运营）"
-      ],
-      "skillsOther": "",
-      "stage": "已经有方案设计",
-      "teamMode": "希望招募队友一起完成",
-      "intent": "🚀 我有明确的创造计划，希望发起项目",
-      "position": "🌟 主导项目 / 推动方向",
-      "motivation": "我喜欢把想法做出来，并完成一个作品",
-      "matchHelp": "✅ 可以，希望推荐项目或队友",
-      "teamed": "",
-      "extra": "",
-      "submittedAt": "2026-07-31 21:41:25"
-    },
-    {
       "id": "090",
       "recordId": "rec27TDnlt1XO9",
       "kind": "project",
@@ -1669,7 +1576,7 @@
       "project": "seed",
       "intro": "ADHD的大脑AI节律罗盘",
       "nickname": "周子清",
-      "contact": "",
+      "contact": "SHIP7_7",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "🎨 设计（UI、UX、视觉、视频等）"
@@ -1698,7 +1605,7 @@
       "project": "the unfinished university",
       "intro": "帮助用户弥补大学时未能阅读经典书籍的遗憾，完成一整套的知识内化流程。用户通过阅读—完成章节测验—中文写作（AI辅助改写）—用户想学习的目标语言翻译—作品发布—形成个人知识库",
       "nickname": "施今謇",
-      "contact": "",
+      "contact": "Theodora- Shi",
       "recruit": [
         "📢 内容 / 运营（内容策划、推广、用户运营）",
         "🎨 设计（UI、UX、视觉、视频等）",
@@ -1722,33 +1629,6 @@
       "submittedAt": "2026-07-31 21:55:57"
     },
     {
-      "id": "092",
-      "recordId": "rec27TDW7U0nhL",
-      "kind": "project",
-      "seed": 0.8565,
-      "project": "基于AI工程实际行业（建筑、市政、公路）知识库搭建及应用生态开发",
-      "intro": "1、7000多本标准、规范设计建筑、市政、公路三大行业的向量化的知识库底座已经搭建好了；\n2、基于知识库底座的四大模块（规范标准的在线查询（可追溯源文件）、可研报告的自动生成（建筑、市政、公路三大行业），已经完成，还有十六大模块正在搭建。\n3、跨设备多智能体驾驶舱已经搭建好了，可以实现异地将云端（claude、codex、kimicode、hermes）、家里的dgx spark（claude、codex、kimicode、hermes）、随身携带的笔记本电脑（claude、codex、kimicode、hermes），通过手机远程遥控指挥他们之间的分工、协作，避免单一模型自说自话，自己当运动员又当裁判员，可以根据任务类型的难易程度及各智能体及模型各自擅长，对一个项目进行任务分解之后，通过沟通机制，对他们进行分工，编代码、审核、巡检、反馈及对用户的反馈，全部自动化操作。",
-      "nickname": "淡定",
-      "contact": "",
-      "recruit": [
-        "💻 技术开发（前端、后端、AI、算法、小程序等）"
-      ],
-      "recruitOther": "",
-      "skills": [
-        "💻 技术开发（前端、后端、AI、算法、小程序等）"
-      ],
-      "skillsOther": "",
-      "stage": "已完成部分功能",
-      "teamMode": "都可以，有合适的 Creator 欢迎加入",
-      "intent": "🚀 我有明确的创造计划，希望发起项目",
-      "position": "🌟 主导项目 / 推动方向",
-      "motivation": "我喜欢把想法做出来，并完成一个作品",
-      "matchHelp": "✅ 可以，希望推荐项目或队友",
-      "teamed": "",
-      "extra": "希望的到技术支撑及投资人资助（经费有限，可以合作）",
-      "submittedAt": "2026-07-31 22:21:29"
-    },
-    {
       "id": "093",
       "recordId": "rec27TE0lfyQAK",
       "kind": "project",
@@ -1756,7 +1636,7 @@
       "project": "任务工作台",
       "intro": "团队任务工作台",
       "nickname": "Bin",
-      "contact": "",
+      "contact": "xiaobin00005",
       "recruit": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）",
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
@@ -1786,7 +1666,7 @@
       "project": "灵感岛",
       "intro": "一个帮助创作者发现自身创作基因的AI伙伴。它像一座「灵魂档案馆」，从个人经历、过往作品和灵感碎片中，提炼独特的创作主题与表达风格，持续激发创作灵感。",
       "nickname": "甘甘",
-      "contact": "",
+      "contact": "lifecoachgangan",
       "recruit": [
         "🎨 设计（UI、UX、视觉、视频等）",
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
@@ -1816,7 +1696,7 @@
       "project": "策标",
       "intro": "我准备制做一款面向企业投标团队的 AI 投标决策平台，用于解析招标文件、匹配企业资质和历史业绩、识别风险条款，并生成投标建议、材料清单和分析报告，帮助企业判断项目是否值得投、能不能投、下一步怎么准备的网站",
       "nickname": "不是山谷",
-      "contact": "",
+      "contact": "G3168432265",
       "recruit": [],
       "recruitOther": "",
       "skills": [
@@ -1842,7 +1722,7 @@
       "project": "全自动生成三维建模，然后能自动报价拆解三维。",
       "intro": "能让不会三维建模的人简单的使用",
       "nickname": "michael",
-      "contact": "",
+      "contact": "13661621468",
       "recruit": [
         "🎨 设计（UI、UX、视觉、视频等）",
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
@@ -1871,7 +1751,7 @@
       "project": "回声·岸",
       "intro": "“回声·岸\"是一个为家庭照护者打造的AI喘息空间。中国社会有超过4000万家庭照护者——照顾失能老人、慢性病家人、残障亲属的家属。他们全年无休，没有下班时间，心理崩溃是常态，但几乎没人问过他们\"你还好吗\"。\n产品核心是每天给照护者15分钟\"合法逃跑\"的时间。打开应用，AI主动问一句\"今天最难的是哪一刻\"，照护者说出来后，AI接住情绪——不是鸡汤式安慰，而是真正理解照护者\"又累又愧疚又放不下\"的复杂心理，并给一个能立刻做的小行动。每次对话生成一张喘息卡，攒在日历里，让照护者看到自己被照顾的记录。\n与通用AI助手的区别在于：AI主动提问而非被动等待回答，Prompt专为照护者心理设计而非通用闲聊，整体体验围绕\"被听见\"和\"被允许停下来\"两个核心感受打造。视觉上采用深色暖色调，加入呼吸引导动画，让照护者从打开应用的第一秒就感到氛围的变化。",
       "nickname": "小牛",
-      "contact": "",
+      "contact": "a2014942388",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "🎨 设计（UI、UX、视觉、视频等）",
@@ -1901,7 +1781,7 @@
       "project": "Pravia 知行序",
       "intro": "Pravia 知行序是一款 AI Walkthrough Platform。它将视频、图文、文档和流程说明转化为结构化、可验证、可执行的交互式引导，并结合用户当前网页环境，在真实页面中指出下一步操作目标。它保留用户的判断权和操作权，负责降低理解、学习和执行数字流程的成本。",
       "nickname": "椰子",
-      "contact": "",
+      "contact": "lyzyy281107",
       "recruit": [
         "其他"
       ],
@@ -1930,7 +1810,7 @@
       "project": "ADHD行动和成长教练",
       "intro": "低内耗，低完美主义，的过好adhd的每一天",
       "nickname": "勇敢慧慧",
-      "contact": "",
+      "contact": "fxh1881759",
       "recruit": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）",
         "📢 内容 / 运营（内容策划、推广、用户运营）"
@@ -1959,7 +1839,7 @@
       "project": "启明灯——零基础自学路径规划师",
       "intro": "给自学者的一个超好用工具，可根据用户需求每日推送高质量内容，（e.g.想从零基础入门AI、想学理财……就推送优质的学习内容，一点点积累，构造整体认知 ）为用户定制高效学习计划，并督促用户每日推进计划执行。同时可记录并理解用户的想法，为用户提供可行性分析，将可落地的想法选择性纳入计划中。",
       "nickname": "小张",
-      "contact": "",
+      "contact": "13839950862",
       "recruit": [
         "📢 内容 / 运营（内容策划、推广、用户运营）",
         "🎨 设计（UI、UX、视觉、视频等）",
@@ -1983,6 +1863,32 @@
       "submittedAt": "2026-08-01 08:28:06"
     },
     {
+      "id": "106",
+      "recordId": "rec27TOSPtpXl9",
+      "kind": "project",
+      "seed": 0.8047,
+      "project": "目前还没有",
+      "intro": "目前还在构思",
+      "nickname": "Kiros",
+      "contact": "KFCvmee_500",
+      "recruit": [],
+      "recruitOther": "",
+      "skills": [
+        "💡 创意 / 产品（想法策划、需求分析、产品设计）",
+        "💻 技术开发（前端、后端、AI、算法、小程序等）"
+      ],
+      "skillsOther": "",
+      "stage": "刚有一个想法",
+      "teamMode": "Solo Creator（独立完成）",
+      "intent": "🚀 我有明确的创造计划，希望发起项目",
+      "position": "🌟 主导项目 / 推动方向",
+      "motivation": "我喜欢把想法做出来，并完成一个作品",
+      "matchHelp": "",
+      "teamed": "",
+      "extra": "",
+      "submittedAt": "2026-08-01 09:04:00"
+    },
+    {
       "id": "003",
       "recordId": "rec27T1TXbwVO2",
       "kind": "seeker",
@@ -1990,7 +1896,7 @@
       "project": "",
       "intro": "",
       "nickname": "访客 16959",
-      "contact": "",
+      "contact": "一只",
       "recruit": [
         "🎨 设计（UI、UX、视觉、视频等）"
       ],
@@ -2017,7 +1923,7 @@
       "project": "",
       "intro": "",
       "nickname": "大D",
-      "contact": "",
+      "contact": "bigdyhs",
       "recruit": [
         "📢 内容 / 运营（内容策划、推广、用户运营）",
         "🎨 设计（UI、UX、视觉、视频等）",
@@ -2048,7 +1954,7 @@
       "project": "",
       "intro": "",
       "nickname": "举重呀！海马",
-      "contact": "",
+      "contact": "18310292962",
       "recruit": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）",
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
@@ -2080,7 +1986,7 @@
       "project": "",
       "intro": "",
       "nickname": "叶子",
-      "contact": "",
+      "contact": "13269958528",
       "recruit": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）",
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
@@ -2111,7 +2017,7 @@
       "project": "",
       "intro": "",
       "nickname": "小九",
-      "contact": "",
+      "contact": "wjy13436",
       "recruit": [
         "🎨 设计（UI、UX、视觉、视频等）",
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
@@ -2140,7 +2046,7 @@
       "project": "",
       "intro": "",
       "nickname": "饺子",
-      "contact": "",
+      "contact": "iwantPierodaVinci",
       "recruit": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）",
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
@@ -2172,7 +2078,7 @@
       "project": "",
       "intro": "",
       "nickname": "阿彪",
-      "contact": "",
+      "contact": "572394873",
       "recruit": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）",
         "🎨 设计（UI、UX、视觉、视频等）",
@@ -2202,7 +2108,7 @@
       "project": "",
       "intro": "",
       "nickname": "DuDu",
-      "contact": "",
+      "contact": "Sunny17123",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "🎨 设计（UI、UX、视觉、视频等）",
@@ -2234,7 +2140,7 @@
       "project": "",
       "intro": "",
       "nickname": "Clion",
-      "contact": "",
+      "contact": "Clion-02",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）"
       ],
@@ -2261,7 +2167,7 @@
       "project": "",
       "intro": "",
       "nickname": "nora",
-      "contact": "",
+      "contact": "comweixing123",
       "recruit": [
         "🎨 设计（UI、UX、视觉、视频等）",
         "📢 内容 / 运营（内容策划、推广、用户运营）"
@@ -2290,7 +2196,7 @@
       "project": "",
       "intro": "",
       "nickname": "ARENE",
-      "contact": "",
+      "contact": "WX17791369690",
       "recruit": [
         "📢 内容 / 运营（内容策划、推广、用户运营）",
         "🎨 设计（UI、UX、视觉、视频等）",
@@ -2321,7 +2227,7 @@
       "project": "",
       "intro": "",
       "nickname": "秦凌风",
-      "contact": "",
+      "contact": "simpsonben",
       "recruit": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）"
       ],
@@ -2349,7 +2255,7 @@
       "project": "",
       "intro": "",
       "nickname": "Nova",
-      "contact": "",
+      "contact": "xf6361636",
       "recruit": [
         "其他"
       ],
@@ -2376,7 +2282,7 @@
       "project": "",
       "intro": "",
       "nickname": "柴一一",
-      "contact": "",
+      "contact": "llly3118",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "🎨 设计（UI、UX、视觉、视频等）"
@@ -2405,7 +2311,7 @@
       "project": "",
       "intro": "",
       "nickname": "Sylvia",
-      "contact": "",
+      "contact": "18852551817",
       "recruit": [
         "📢 内容 / 运营（内容策划、推广、用户运营）",
         "🎨 设计（UI、UX、视觉、视频等）",
@@ -2435,7 +2341,7 @@
       "project": "",
       "intro": "",
       "nickname": "羊村懒太保",
-      "contact": "",
+      "contact": "lycong2007",
       "recruit": [
         "其他"
       ],
@@ -2462,7 +2368,7 @@
       "project": "",
       "intro": "",
       "nickname": "kiki",
-      "contact": "",
+      "contact": "hjq17796303102",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "💡 创意 / 产品（想法策划、需求分析、产品设计）"
@@ -2490,7 +2396,7 @@
       "project": "",
       "intro": "",
       "nickname": "小金刚",
-      "contact": "",
+      "contact": "Valeria_wly",
       "recruit": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）"
       ],
@@ -2510,29 +2416,6 @@
       "submittedAt": "2026-07-31 14:12:22"
     },
     {
-      "id": "057",
-      "recordId": "recvqVDaIVn6nI",
-      "kind": "seeker",
-      "seed": 0.7855,
-      "project": "",
-      "intro": "",
-      "nickname": "ethan xu",
-      "contact": "",
-      "recruit": [],
-      "recruitOther": "",
-      "skills": [],
-      "skillsOther": "",
-      "stage": "",
-      "teamMode": "",
-      "intent": "🤝 我希望加入其他人的创造计划",
-      "position": "",
-      "motivation": "",
-      "matchHelp": "",
-      "teamed": "",
-      "extra": "",
-      "submittedAt": "2026-07-31 14:12:24"
-    },
-    {
       "id": "058",
       "recordId": "rec27TvOktPaew",
       "kind": "seeker",
@@ -2540,7 +2423,7 @@
       "project": "",
       "intro": "",
       "nickname": "jia",
-      "contact": "",
+      "contact": "q3143508368",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "🎨 设计（UI、UX、视觉、视频等）",
@@ -2570,7 +2453,7 @@
       "project": "",
       "intro": "",
       "nickname": "睡不醒",
-      "contact": "",
+      "contact": "SCF007002",
       "recruit": [
         "🎨 设计（UI、UX、视觉、视频等）",
         "💡 创意 / 产品（想法策划、需求分析、产品设计）",
@@ -2593,52 +2476,6 @@
       "submittedAt": "2026-07-31 14:47:32"
     },
     {
-      "id": "064",
-      "recordId": "recvqWhFHIXTux",
-      "kind": "seeker",
-      "seed": 0.0133,
-      "project": "",
-      "intro": "",
-      "nickname": "ethan xu",
-      "contact": "",
-      "recruit": [],
-      "recruitOther": "",
-      "skills": [],
-      "skillsOther": "",
-      "stage": "",
-      "teamMode": "",
-      "intent": "🤝 我希望加入其他人的创造计划",
-      "position": "",
-      "motivation": "",
-      "matchHelp": "",
-      "teamed": "",
-      "extra": "",
-      "submittedAt": "2026-07-31 16:53:16"
-    },
-    {
-      "id": "066",
-      "recordId": "recvqWjO2gLtPb",
-      "kind": "seeker",
-      "seed": 0.1855,
-      "project": "",
-      "intro": "",
-      "nickname": "ethan xu",
-      "contact": "",
-      "recruit": [],
-      "recruitOther": "",
-      "skills": [],
-      "skillsOther": "",
-      "stage": "",
-      "teamMode": "",
-      "intent": "🤝 我希望加入其他人的创造计划",
-      "position": "",
-      "motivation": "",
-      "matchHelp": "",
-      "teamed": "",
-      "extra": "",
-      "submittedAt": "2026-07-31 17:01:45"
-    },
-    {
       "id": "067",
       "recordId": "rec27TyzJGoRIM",
       "kind": "seeker",
@@ -2646,7 +2483,7 @@
       "project": "",
       "intro": "",
       "nickname": "Rory",
-      "contact": "",
+      "contact": "roryyu",
       "recruit": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）"
       ],
@@ -2673,7 +2510,7 @@
       "project": "",
       "intro": "",
       "nickname": "YOLO",
-      "contact": "",
+      "contact": "Carpediemday00",
       "recruit": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）",
         "💻 技术开发（前端、后端、AI、算法、小程序等）"
@@ -2701,7 +2538,7 @@
       "project": "",
       "intro": "",
       "nickname": "Luster",
-      "contact": "",
+      "contact": "snangLanngyang --Lan",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "💡 创意 / 产品（想法策划、需求分析、产品设计）",
@@ -2731,7 +2568,7 @@
       "project": "",
       "intro": "",
       "nickname": "六时夜",
-      "contact": "",
+      "contact": "ikloyhju",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "🎨 设计（UI、UX、视觉、视频等）"
@@ -2760,7 +2597,7 @@
       "project": "",
       "intro": "",
       "nickname": "王林",
-      "contact": "",
+      "contact": "Handaoxing2013",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "🎨 设计（UI、UX、视觉、视频等）"
@@ -2789,7 +2626,7 @@
       "project": "",
       "intro": "",
       "nickname": "andverror",
-      "contact": "",
+      "contact": "andverror",
       "recruit": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）",
         "🎨 设计（UI、UX、视觉、视频等）",
@@ -2820,7 +2657,7 @@
       "project": "",
       "intro": "",
       "nickname": "舒紫恒",
-      "contact": "",
+      "contact": "17758287938",
       "recruit": [
         "💻 技术开发（前端、后端、AI、算法、小程序等）",
         "💡 创意 / 产品（想法策划、需求分析、产品设计）",
@@ -2851,7 +2688,7 @@
       "project": "",
       "intro": "",
       "nickname": "烤鱿鱼",
-      "contact": "",
+      "contact": "sacralecho_aha",
       "recruit": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）",
         "🎨 设计（UI、UX、视觉、视频等）",
@@ -2882,7 +2719,7 @@
       "project": "",
       "intro": "",
       "nickname": "季月",
-      "contact": "",
+      "contact": "qaz8251446",
       "recruit": [
         "📢 内容 / 运营（内容策划、推广、用户运营）",
         "🎨 设计（UI、UX、视觉、视频等）"
@@ -2911,7 +2748,7 @@
       "project": "",
       "intro": "",
       "nickname": "柚子",
-      "contact": "",
+      "contact": "abc923820G",
       "recruit": [
         "💡 创意 / 产品（想法策划、需求分析、产品设计）",
         "💻 技术开发（前端、后端、AI、算法、小程序等）",

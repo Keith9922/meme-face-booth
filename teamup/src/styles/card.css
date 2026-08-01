@@ -390,11 +390,24 @@
 
 .contact__icon {
   flex: none;
-  font-size: 14px;
+  font-size: 15px;
+}
+
+.contact__body {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: grid;
+  gap: 1px;
+}
+
+.contact__label {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #2b8c84;
 }
 
 .contact__value {
-  flex: 1 1 auto;
   min-width: 0;
   font-size: 14px;
   font-weight: 800;
@@ -402,6 +415,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  /* 点一下就能整串选中，方便手动复制（有人禁用了剪贴板权限） */
   user-select: all;
 }
 
