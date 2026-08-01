@@ -116,9 +116,11 @@ body {
    头部：招牌 + 数字 + 说明
    -------------------------------------------------------------------------- */
 
+/* 导航接管了「去哪儿」，头部只需要交代「这是什么、有多少人、现在最缺谁」，
+   所以比之前压掉了一半高度 —— 第一屏要能看见卡片。 */
 .hero {
   position: relative;
-  padding: clamp(36px, 7vw, 76px) 0 clamp(20px, 3vw, 32px);
+  padding: clamp(24px, 4vw, 42px) 0 clamp(12px, 1.6vw, 18px);
   text-align: center;
 }
 
@@ -177,10 +179,10 @@ body {
 }
 
 .hero__lead {
-  margin: 22px auto 0;
+  margin: 14px auto 0;
   max-width: 46em;
-  font-size: clamp(15px, 1.6vw, 17.5px);
-  line-height: 1.85;
+  font-size: clamp(14px, 1.5vw, 16px);
+  line-height: 1.8;
   font-weight: 600;
   color: #2f5a2c;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.55);
@@ -196,22 +198,22 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 12px;
-  margin-top: 26px;
+  gap: 10px;
+  margin-top: 16px;
 }
 
 .stat {
-  min-width: 116px;
-  padding: 12px 20px 13px;
-  border-radius: 18px;
+  min-width: 104px;
+  padding: 9px 18px 10px;
+  border-radius: 16px;
   background: var(--parchment);
   border: 2.5px solid #e0d5ae;
-  box-shadow: 0 5px 0 rgba(61, 52, 40, 0.13);
+  box-shadow: 0 4px 0 rgba(61, 52, 40, 0.13);
 }
 
 .stat__num {
   display: block;
-  font-size: 30px;
+  font-size: 25px;
   line-height: 1.05;
   font-weight: 900;
   color: var(--ink);
@@ -255,6 +257,77 @@ body {
   margin-top: 12px;
   padding-top: 12px;
   border-top: 2px dashed rgba(143, 115, 79, 0.28);
+}
+
+/* 四组标签筛选：宽屏两列，窄屏一列 */
+.toolbar__grid {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 2px dashed rgba(143, 115, 79, 0.28);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  gap: 4px 26px;
+}
+/* 网格里的行自己不再画分隔线，交给网格的间距 */
+.toolbar__grid .toolbar__row + .toolbar__row,
+.toolbar__grid .toolbar__row {
+  margin-top: 0;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-top: 0;
+  align-items: flex-start;
+}
+.toolbar__grid .toolbar__label {
+  width: 4.6em;
+  padding-top: 5px;
+}
+
+/* 「更多筛选」开关 */
+.toolbar__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 13px;
+  border: 2.5px solid #ded2ac;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 3px 0 rgba(61, 52, 40, 0.12);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.16s ease, transform 0.12s ease, box-shadow 0.12s ease;
+}
+.toolbar__more:hover {
+  background: #fff;
+}
+.toolbar__more:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 rgba(61, 52, 40, 0.12);
+}
+.toolbar__more b {
+  display: grid;
+  place-items: center;
+  min-width: 19px;
+  height: 19px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #19c8b9;
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 900;
+}
+.toolbar__caret {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid var(--ink-soft);
+  transition: rotate 0.22s ease;
+}
+.toolbar__caret[data-open='true'] {
+  rotate: 180deg;
 }
 
 /* Tabs 在这里只当分段控件用，内容区由下面的卡片墙承担 —— 把它的空面板收掉。

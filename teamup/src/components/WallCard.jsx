@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Card } from 'animal-island-ui';
 
 import Chip from './Chip.jsx';
@@ -46,9 +46,21 @@ function Field({ label, children }) {
   );
 }
 
-export default function WallCard({ entry, index }) {
+export default function WallCard({ entry, index, focused = false, onFocusHandled }) {
   const [flipped, setFlipped] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [highlight, setHighlight] = useState(false);
+
+  // 从撮合结果 / 小助手 / 在招项目列表跳过来时：自动翻到背面（联系方式那一面），
+  // 并亮一下边框，让人知道「就是这张」。
+  useEffect(() => {
+    if (!focused) return;
+    setFlipped(true);
+    setHighlight(true);
+    const t = setTimeout(() => setHighlight(false), 2200);
+    onFocusHandled?.();
+    return () => clearTimeout(t);
+  }, [focused, onFocusHandled]);
 
   const isProject = entry.kind === 'project';
   const leaf = pick(LEAF_TONES, entry.seed);
@@ -132,6 +144,8 @@ export default function WallCard({ entry, index }) {
     <li
       className="pin"
       data-flipped={String(flipped)}
+      data-record={entry.recordId}
+      data-highlight={String(highlight)}
       style={{
         '--rot': `${rot.toFixed(2)}deg`,
         '--lift': `${lift}px`,
