@@ -24,6 +24,9 @@ function pick(list, seed) {
   return list[Math.floor(seed * list.length) % list.length];
 }
 
+/** 大陆手机号。这一栏填手机号的人，这串数字同时就是 ta 的微信号 */
+const isPhone = (s) => /^1[3-9]\d{9}$/.test(String(s).trim());
+
 /** 一组标签，空数组时返回 null 而不是留个空壳 */
 function TagRow({ items, className = 'field__tags' }) {
   if (!items.length) return null;
@@ -238,19 +241,27 @@ export default function WallCard({ entry, index, focused = false, onFocusHandled
               </span>
             </div>
 
+            {/* 表里那一栏就叫「联系方式（微信）」：填手机号的，手机号本身就是微信号。
+                所以统一按微信呈现，是手机号的额外标一下，省得有人以为要打电话。 */}
             <div className="contact">
               <span className="contact__icon" aria-hidden="true">
-                📮
+                💬
               </span>
               {entry.contact ? (
                 <>
-                  <span className="contact__value">{entry.contact}</span>
+                  <span className="contact__body">
+                    <span className="contact__label">
+                      微信{isPhone(entry.contact) ? '（手机号即微信）' : ''}
+                    </span>
+                    <span className="contact__value">{entry.contact}</span>
+                  </span>
                   <button
                     type="button"
                     className="contact__copy"
                     data-copied={String(copied)}
                     tabIndex={flipped ? 0 : -1}
                     onClick={copyContact}
+                    aria-label={`复制 ${entry.nickname} 的微信`}
                   >
                     {copied ? '已复制' : '复制'}
                   </button>
