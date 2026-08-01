@@ -91,3 +91,23 @@ export function toTags(raw, dict) {
 
 /** 筛选栏用的「招募方向」选项（不含「已有队友」「其他」这类非能力项） */
 export const FILTER_ROLES = ROLE_TAGS.filter((r) => ['product', 'dev', 'design', 'ops'].includes(r.key));
+
+/**
+ * 把一条原始选项文案归到四个方向之一，认不出来返回 null。
+ *
+ * 必须走 ROLE_TAGS 的顺序做「首个命中」，不能各自 includes ——
+ * 「💡 创意 / 产品（想法策划、需求分析、产品设计）」里含「设计」两个字，
+ * 单独判断 includes('设计') 会把一大批产品人误算成设计师，
+ * 缺口统计会直接反过来。
+ */
+export function roleKeyOf(raw) {
+  const text = String(raw ?? '').trim();
+  if (!text) return null;
+  const hit = ROLE_TAGS.find((d) => text.includes(d.match));
+  return hit && ['product', 'dev', 'design', 'ops'].includes(hit.key) ? hit.key : null;
+}
+
+/** 一条记录归一化后的方向集合（去重） */
+export function roleKeys(list) {
+  return [...new Set((list || []).map(roleKeyOf).filter(Boolean))];
+}

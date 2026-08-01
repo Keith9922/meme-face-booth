@@ -1,0 +1,953 @@
+/* ==========================================================================
+   缺口 / 撮合 / 在招项目 —— 卡片墙之外的几个板块
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   顶部导航：四块木牌，一次只展开一个板块
+   -------------------------------------------------------------------------- */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  margin: 20px 0 4px;
+  padding: 10px;
+  border-radius: var(--radius-lg);
+  background: rgba(247, 243, 223, 0.95);
+  backdrop-filter: blur(10px);
+  border: 3px solid #e6dcb8;
+  box-shadow: 0 6px 0 rgba(61, 52, 40, 0.12), 0 14px 30px rgba(37, 62, 34, 0.18);
+}
+
+.nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.nav__item {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 11px 12px;
+  border: 2.5px solid #ded2ac;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 4px 0 rgba(61, 52, 40, 0.14);
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform 0.14s ease, box-shadow 0.14s ease, background 0.18s ease,
+    border-color 0.18s ease;
+}
+.nav__item:hover {
+  background: #fff;
+  transform: translateY(-1px);
+}
+/* 选中的牌子往下压进土里，3D 阴影收掉 —— 组件库按钮就是这个语言 */
+.nav__item[data-on='true'] {
+  background: #19c8b9;
+  border-color: #12a094;
+  box-shadow: 0 1px 0 #0f8c82;
+  transform: translateY(3px);
+}
+
+.nav__leaf {
+  position: absolute;
+  top: -14px;
+  right: 10px;
+  width: 26px;
+  height: 26px;
+  rotate: 16deg;
+  filter: drop-shadow(0 2px 2px rgba(40, 60, 30, 0.3));
+  pointer-events: none;
+}
+
+.nav__emoji {
+  font-size: 19px;
+  line-height: 1;
+}
+
+.nav__text {
+  display: grid;
+  gap: 1px;
+  text-align: left;
+  min-width: 0;
+}
+
+.nav__label {
+  font-size: 14.5px;
+  font-weight: 900;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.nav__sub {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.nav__item[data-on='true'] .nav__label {
+  color: #fff;
+}
+.nav__item[data-on='true'] .nav__sub {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+@media (max-width: 860px) {
+  .nav {
+    position: static;
+    padding: 8px;
+  }
+  .nav__list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+  .nav__item {
+    padding: 9px 8px;
+    gap: 6px;
+  }
+  .nav__label {
+    font-size: 13px;
+  }
+  .nav__sub {
+    font-size: 10px;
+  }
+  .nav__leaf {
+    display: none;
+  }
+}
+
+/* 切板块时轻轻淡入，让人知道内容换了而不是页面跳了 */
+.view {
+  animation: view-in 0.32s ease both;
+}
+@keyframes view-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .view {
+    animation: none;
+  }
+}
+
+.section {
+  margin: clamp(22px, 3.4vw, 38px) 0;
+}
+
+.section__head {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* 组队墙那一栏只要一句说明，不需要 kicker 那么大的排场 */
+.section__head--tight {
+  margin-bottom: 14px;
+}
+.section__head--tight .section__title {
+  font-size: clamp(19px, 2.4vw, 24px);
+  margin-bottom: 5px;
+}
+.section__head--tight .section__lead {
+  font-size: 13.5px;
+}
+
+/* 正文里指向别的板块的行内按钮 */
+.section__jump {
+  border: 0;
+  padding: 1px 8px;
+  margin: 0 2px;
+  border-radius: 999px;
+  background: rgba(25, 200, 185, 0.18);
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 800;
+  color: #12756c;
+  cursor: pointer;
+  transition: background 0.16s ease;
+}
+.section__jump:hover {
+  background: rgba(25, 200, 185, 0.34);
+}
+
+.section__kicker {
+  display: inline-block;
+  font-family: Nunito, sans-serif;
+  font-size: 11.5px;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  color: #2c5a2a;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+
+.section__title {
+  margin: 0 0 8px;
+  font-size: clamp(23px, 3.4vw, 31px);
+  font-weight: 900;
+  color: #1f4a20;
+  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.5);
+}
+
+.section__lead {
+  margin: 0 auto;
+  max-width: 40em;
+  font-size: 14.5px;
+  line-height: 1.85;
+  font-weight: 600;
+  color: #2a5228;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.42);
+}
+
+/* 板块外壳统一用组件库的 Card，这里补内边距 */
+.section > div[class*='animal-card-'] {
+  padding: clamp(16px, 2.4vw, 26px);
+}
+
+/* --------------------------------------------------------------------------
+   缺口条
+   -------------------------------------------------------------------------- */
+
+/* 宽屏铺两列，四个方向一屏看完，不用往下拉 */
+.gaps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(430px, 1fr));
+  gap: 10px;
+}
+
+.gap__btn {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 118px 1fr 108px;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 14px;
+  border: 2.5px solid transparent;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.5);
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+.gap__btn:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-1px);
+}
+.gap[data-on='true'] .gap__btn {
+  border-color: var(--focus);
+  background: #fff;
+}
+
+.gap__name {
+  font-size: 14.5px;
+  font-weight: 800;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+/* 左右各一半，从中线往两边长 —— 一眼看出哪边更长 */
+.gap__bars {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+.gap__side {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+.gap__side--demand {
+  flex-direction: row-reverse;
+}
+
+.gap__track {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 13px;
+  border-radius: 999px;
+  background: rgba(125, 100, 68, 0.14);
+  overflow: hidden;
+  display: flex;
+}
+.gap__side--demand .gap__track {
+  justify-content: flex-end;
+}
+
+.gap__fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.gap__fill--demand {
+  background: linear-gradient(90deg, #f0a878, #e07a4a);
+}
+.gap__fill--supply {
+  background: linear-gradient(90deg, #7fc9a8, #4fa77f);
+}
+
+.gap__num {
+  flex: none;
+  font-family: Nunito, sans-serif;
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  min-width: 22px;
+  text-align: center;
+}
+
+.gap__cap {
+  flex: none;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.gap__verdict {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+.gap__verdict b {
+  font-family: Nunito, sans-serif;
+  font-size: 19px;
+  font-weight: 900;
+  line-height: 1.1;
+}
+.gap__verdict[data-short='true'] b {
+  color: #a33b1f;
+}
+.gap__verdict[data-short='false'] b {
+  color: #2f7a52;
+}
+
+.gaps__hint {
+  margin: 14px 0 0;
+  text-align: center;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 760px) {
+  .gap__btn {
+    grid-template-columns: 1fr auto;
+    grid-template-areas: 'name verdict' 'bars bars';
+    gap: 8px 10px;
+  }
+  .gap__name {
+    grid-area: name;
+  }
+  .gap__verdict {
+    grid-area: verdict;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 5px;
+  }
+  .gap__bars {
+    grid-area: bars;
+  }
+  .gap__cap {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   撮合
+   -------------------------------------------------------------------------- */
+
+.mm {
+  display: grid;
+  grid-template-columns: minmax(0, 380px) minmax(0, 1fr);
+  gap: clamp(16px, 2.4vw, 30px);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .mm {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mm__form {
+  display: grid;
+  gap: 14px;
+}
+
+.mm__field {
+  display: grid;
+  gap: 7px;
+}
+
+.mm__label {
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+}
+.mm__label em {
+  font-style: normal;
+  font-weight: 600;
+  opacity: 0.75;
+}
+
+.mm__note {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #a33b1f;
+}
+
+.mm__privacy {
+  margin: 0;
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  opacity: 0.9;
+}
+
+.mm__result {
+  min-height: 260px;
+}
+
+.mm__empty {
+  height: 100%;
+  min-height: 240px;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 10px;
+  padding: 24px;
+  border-radius: 20px;
+  border: 3px dashed #d9cca2;
+  background: rgba(255, 255, 255, 0.42);
+  text-align: center;
+}
+.mm__empty span {
+  font-size: 34px;
+}
+.mm__empty p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.9;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+.mm__empty b {
+  color: var(--ink);
+}
+
+.mm__summary {
+  padding: 13px 15px;
+  margin-bottom: 12px;
+  border-radius: 16px;
+  background: rgba(25, 200, 185, 0.13);
+  border: 2px solid rgba(25, 200, 185, 0.38);
+  font-size: 13.5px;
+  line-height: 1.85;
+  font-weight: 600;
+  color: #145f59;
+}
+.mm__summary-tag {
+  display: inline-block;
+  margin-right: 8px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: #19c8b9;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  vertical-align: 1px;
+}
+
+.mm__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.mm__rowbtn {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 30px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 11px 13px;
+  border: 2px solid #e6dcb8;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.62);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.16s ease, transform 0.16s ease, border-color 0.16s ease;
+}
+.mm__rowbtn:hover {
+  background: #fff;
+  border-color: #d4c496;
+  transform: translateX(2px);
+}
+
+.mm__rank {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(125, 100, 68, 0.16);
+  font-family: Nunito, sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--ink-soft);
+}
+.mm__rank[data-top='true'] {
+  background: #f5c31c;
+  color: #5a4410;
+  box-shadow: 0 2px 0 #d0a412;
+}
+
+.mm__body {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.mm__name {
+  font-size: 14.5px;
+  font-weight: 900;
+  color: var(--ink);
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+.mm__no {
+  font-family: Nunito, sans-serif;
+  font-size: 10.5px;
+  font-weight: 800;
+  color: var(--ink-soft);
+  opacity: 0.8;
+}
+
+.mm__intro {
+  font-size: 12.5px;
+  line-height: 1.6;
+  font-weight: 500;
+  color: #6b5a44;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.mm__why {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 2px;
+}
+.mm__reason {
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #dcefdc;
+  color: #1f5c23;
+}
+.mm__reason[data-neg='true'] {
+  background: #fddedd;
+  color: #85211d;
+}
+
+.mm__score {
+  display: grid;
+  justify-items: center;
+  gap: 0;
+}
+.mm__score b {
+  font-family: Nunito, sans-serif;
+  font-size: 21px;
+  font-weight: 900;
+  line-height: 1.05;
+  color: #2f7a52;
+}
+.mm__score small {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.mm__tip {
+  margin: 12px 0 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   AI 小助手
+   -------------------------------------------------------------------------- */
+
+.chat {
+  display: grid;
+  gap: 12px;
+}
+
+.chat__scroll {
+  min-height: 300px;
+  max-height: 460px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 6px 8px 6px 2px;
+  display: grid;
+  gap: 14px;
+  align-content: start;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(125, 100, 68, 0.35) transparent;
+}
+.chat__scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.chat__scroll::-webkit-scrollbar-thumb {
+  background: rgba(125, 100, 68, 0.3);
+  border-radius: 999px;
+}
+
+.chat__msg {
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+}
+.chat__msg[data-role='user'] {
+  justify-content: flex-end;
+}
+
+.chat__avatar {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 17px;
+  background: #ffe6a8;
+  border: 2.5px solid #e8c877;
+  box-shadow: 0 2px 0 rgba(61, 52, 40, 0.14);
+}
+
+.chat__bubble {
+  max-width: min(74ch, 88%);
+  padding: 11px 15px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.85;
+  font-weight: 500;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.chat__msg[data-role='assistant'] .chat__bubble {
+  background: rgba(255, 255, 255, 0.85);
+  border: 2px solid #e6dcb8;
+  border-top-left-radius: 6px;
+  color: #5f4f3a;
+}
+.chat__msg[data-role='user'] .chat__bubble {
+  background: #19c8b9;
+  border: 2px solid #12a094;
+  border-bottom-right-radius: 6px;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* 正在打字的光标 */
+.chat__caret {
+  display: inline-block;
+  width: 8px;
+  height: 16px;
+  vertical-align: -3px;
+  margin-left: 2px;
+  border-radius: 2px;
+  background: #19c8b9;
+  animation: caret-blink 1s steps(2) infinite;
+}
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* 回复里的 [023] 变成可点角标 */
+.chat__ref {
+  display: inline-block;
+  margin: 0 1px;
+  padding: 1px 7px;
+  border: 0;
+  border-radius: 999px;
+  background: #ebdcfb;
+  color: #46207a;
+  font-family: Nunito, sans-serif;
+  font-size: 11.5px;
+  font-weight: 900;
+  cursor: pointer;
+  vertical-align: 1px;
+}
+.chat__ref:hover {
+  background: #d6bcf3;
+}
+
+.chat__cards {
+  display: grid;
+  gap: 7px;
+  margin-top: 10px;
+}
+.chat__card {
+  display: grid;
+  gap: 2px;
+  padding: 9px 12px;
+  border: 2px solid #d6bcf3;
+  border-radius: 14px;
+  background: rgba(235, 220, 251, 0.5);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.16s ease, transform 0.16s ease;
+}
+.chat__card:hover {
+  background: #ebdcfb;
+  transform: translateX(2px);
+}
+.chat__card b {
+  font-size: 13.5px;
+  font-weight: 900;
+  color: #3c1c66;
+  /* 有的项目名本身就是一整段话（最长 55 字），别让它把气泡撑开 */
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.chat__card span {
+  font-size: 12px;
+  font-weight: 500;
+  color: #5a4478;
+}
+.chat__card em {
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 800;
+  color: #7b52b8;
+}
+
+.chat__error {
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: #fddedd;
+  border: 2px solid #f7bcba;
+  font-size: 13px;
+  font-weight: 700;
+  color: #85211d;
+}
+
+.chat__suggest {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.chat__chip {
+  padding: 7px 13px;
+  border: 2px dashed #d4c496;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.6);
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: background 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+}
+.chat__chip:hover {
+  background: #fff;
+  border-style: solid;
+  border-color: #19c8b9;
+  color: #12756c;
+}
+
+.chat__composer {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+}
+.chat__composer > :first-child {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.chat__privacy {
+  margin: 0;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  opacity: 0.9;
+}
+
+/* --------------------------------------------------------------------------
+   在招项目
+   -------------------------------------------------------------------------- */
+
+/* 57 个项目单列排下去有一万多像素，宽屏铺成多列 */
+.ops {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 10px;
+  align-items: stretch;
+}
+
+.ops__row {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  /* 固定的五段式：编号行 / 名字 / 发起人 / 介绍 / 缺口。
+     介绍那一行用 1fr 吃掉剩余空间，缺口永远贴在底边，整排卡片底部就对齐了。 */
+  grid-template-rows: auto auto auto 1fr auto;
+  gap: 5px;
+  padding: 12px 14px 13px;
+  border: 2px solid #e6dcb8;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.55);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.16s ease, transform 0.16s ease, border-color 0.16s ease;
+}
+.ops__row:hover {
+  background: #fff;
+  border-color: #d4c496;
+  transform: translateY(-2px);
+}
+
+.ops__meta {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.ops__no {
+  font-family: Nunito, sans-serif;
+  font-size: 10.5px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  color: #7d6444;
+  background: rgba(125, 100, 68, 0.13);
+  padding: 2px 8px;
+  border-radius: 999px;
+  flex: none;
+}
+
+/* 项目名最长 55 字，夹两行；超长的自动降一档字号靠 CSS 做不到，
+   所以用 break-word + clamp 保证不会顶破格子 */
+.ops__name {
+  font-size: 15px;
+  line-height: 1.45;
+  font-weight: 900;
+  color: var(--ink);
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ops__by {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+.ops__by::before {
+  content: '发起人 ';
+  font-weight: 600;
+  opacity: 0.72;
+}
+
+.ops__intro {
+  font-size: 12.5px;
+  line-height: 1.65;
+  font-weight: 500;
+  color: #6b5a44;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ops__need {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding-top: 8px;
+  border-top: 2px dashed rgba(143, 115, 79, 0.28);
+}
+.ops__need-label {
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--ink-soft);
+}
+
+/* --------------------------------------------------------------------------
+   被跳转命中的卡片
+   -------------------------------------------------------------------------- */
+
+.pin[data-highlight='true'] .face > div {
+  box-shadow: 0 0 0 4px var(--focus), var(--shadow-card-hover);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pin[data-highlight='true'] {
+    animation: pin-found 0.6s ease 2;
+  }
+  @keyframes pin-found {
+    0%,
+    100% {
+      scale: 1;
+    }
+    50% {
+      scale: 1.035;
+    }
+  }
+}
